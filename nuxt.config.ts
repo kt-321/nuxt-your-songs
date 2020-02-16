@@ -1,6 +1,7 @@
 import { Configuration } from '@nuxt/types'
 const config: Configuration = {
     mode: 'spa',
+    srcDir: 'app/',
     /*
      **  Headers of the page
      */
@@ -24,25 +25,32 @@ const config: Configuration = {
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: [],
+    plugins: [
+        '~/plugins/mixins',
+        '~/plugins/axios'
+    ],
     /*
      ** Nuxt.js dev-modules
      */
     buildModules: ['@nuxtjs/eslint-module', '@nuxt/typescript-build'],
-    // buildModules: ['@nuxt/typescript-build'],
     /*
      ** Nuxt.js modules
      */
-    modules: [],
-    /*
-     ** Build configuration
-     */
-    build: {
-        /*
-         ** You can extend webpack config here
-         */
-        // extend(config, ctx) {
-        // }
+    modules: [
+        '@nuxtjs/axios',
+        '@nuxtjs/proxy',
+        ['cookie-universal-nuxt', { alias: 'cookies' }],
+    ],
+    axios: {
+        prefix: '/api'
+    },
+    proxy: {
+        '/api': {
+            target: 'http://localhost:8080',
+            pathRewrite: {
+              '^/api' : '/'
+              }
+            }
     }
 }
 

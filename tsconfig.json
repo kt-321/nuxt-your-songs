@@ -17,7 +17,6 @@
     "baseUrl": ".",
     "paths": {
       "~/*": [
-        // "./*"
         "./app/*"
       ],
       "@/*": [
@@ -26,7 +25,10 @@
     },
     "types": [
       "@types/node",
-      "@nuxt/types"
+      "@nuxt/types",
+      "@nuxtjs/axios",
+      "cookie-universal-nuxt",
+      "./app/types/nuxt"
     ]
   },
   "exclude": [
