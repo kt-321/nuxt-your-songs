@@ -59,7 +59,7 @@ export default class CTextInput extends Vue {
     @Prop(String) text?: string
     // placeholder
     @Prop(String) placeholder?: string
-    // どんなデータで欲しいのかよくわからない場合とりあえず文字列で返す
+    // とりあえず文字列で返す
     @PropSync('model', { default: undefined }) syncModel!: string | number | boolean | null | undefined
     inputHandler() {
         this.$emit('c-input', this.text)
