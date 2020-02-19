@@ -2,7 +2,7 @@
     <ns-page class="page-dashboard">
         <div>
             <p>ダッシュボード</p>
-            {{ user }}
+            <pre>{{ $store.getters['user/user'] }}</pre>
         </div>
     </ns-page>
 </template>
@@ -15,17 +15,7 @@ import { Component, Vue } from 'vue-property-decorator'
         titleTemplate: 'ダッシュボード | %s'
     }
 })
-export default class PageDashboard extends Vue {
-    user = ''
-    async loadUser() {
-        const user = await this.$axios.$get('/api/user')
-        console.log(user)
-        this.user = user
-    }
-    mounted() {
-        this.loadUser()
-    }
-}
+export default class PageDashboard extends Vue {}
 </script>
 
 <style lang="stylus"></style>

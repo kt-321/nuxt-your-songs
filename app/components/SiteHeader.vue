@@ -1,10 +1,19 @@
 <template>
     <header>
         <div class="header-wrapper">
-            <nuxt-link class="site-title" to="/">
-                Your Song
-                <button @click="signout">ログアウト</button>
+            <nuxt-link class="site-title" :to="homeUrl()">
+                Your Songs
             </nuxt-link>
+            <div v-if="!$store.getters['user/isGuest']" class="menu-wrapper">
+                <ul class="menu">
+                    <li>
+                        <nuxt-link to="/user/mypage">マイページ</nuxt-link>
+                    </li>
+                    <li>
+                        <a class="signout" @click="signout">ログアウト</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
 </template>
@@ -27,8 +36,8 @@ export default class SiteHeader extends Vue {
         if (confirm('ログアウトします。よろしいですか？')) {
             // ログアウト処理
             await this.$store.dispatch('user/signoutUser')
-            // トップページにリダイレクト
-            this.$router.replace('/')
+            // ログインページにリダイレクト
+            this.$router.replace('/user/signin')
         }
     }
 }
@@ -62,11 +71,6 @@ header
                 display: flex
                 flex: 1 1 auto
                 align-items: center
-                &.start
-                    padding-left: 36px
-                    justify-content: flex-start
-                &.end
-                    justify-content: flex-end
                 margin: 0
                 padding: 0
                 list-style: none
@@ -83,13 +87,4 @@ header
                         cursor: pointer
                         &:hover
                             color: #fff
-                    &.divider:after
-                        content: '|'
-                        color: $dark-bg-color
-                        margin: 0 4px
-                    &:last-child
-                        margin-left: 8px
-                    &.team
-                        span
-                            display: inline
 </style>

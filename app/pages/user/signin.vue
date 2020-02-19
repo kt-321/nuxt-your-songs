@@ -10,8 +10,6 @@
                 <input v-model="password" type="password" />
             </div>
             <button @click="login">ログイン</button>
-            <button @click="clickUsers">users</button>
-            {{ users.users }}
         </div>        
     </ns-page>
 </template>
@@ -27,7 +25,6 @@ export default class PageSignin extends Vue {
     username=''
     password=''
     users = ''
-    storeUser = ''
 
     async login() {
         const postData = {
@@ -44,17 +41,14 @@ export default class PageSignin extends Vue {
         this.$cookies.set('__cred__', response.access_token, {
             path: '/',
         })
-        this.$store.dispatch('user/signinUser').catch(error => {
-            console.log('ログインに失敗しました')
-        })
         // ダッシュボードに遷移
         this.$router.replace('/dashboard')
     }
 
-    // アクセストークンがクッキーに残ったままでないか確認用
-    async clickUsers() {
-        const users = await this.$axios.$get('/api/users')
-        this.users = users
+    mounted() {
+        if(!this.$store.getters['user/isGuest']) {
+            this.$router.replace('/dashboard')
+        }
     }
 }
 </script>

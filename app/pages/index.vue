@@ -12,21 +12,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
-export default class PageIndex extends Vue {
-    token = ''
-    user5 = ''
-    async loadToken() {
-        try {
-            const token = await this.$store.getters['user/token']
-            this.token = token
-        } catch (error) {
-            console.log('トーク取得失敗')
-        }
-    }
-    mounted() {
-        this.loadToken()
-    }
-}
+export default class PageIndex extends Vue {}
 </script>
 
 <style lang="stylus">
