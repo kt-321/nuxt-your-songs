@@ -24,7 +24,6 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class PageSignin extends Vue {
     username=''
     password=''
-    users = ''
 
     async login() {
         const postData = {

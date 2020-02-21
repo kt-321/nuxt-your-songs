@@ -14,6 +14,16 @@
                     </li>
                 </ul>
             </div>
+            <div v-if="$store.getters['user/isGuest']" class="menu-wrapper">
+                <ul class="menu">
+                    <li>
+                        <nuxt-link to="/user/signin">ログイン</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link to="/signup">ユーザー登録</nuxt-link>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
 </template>
