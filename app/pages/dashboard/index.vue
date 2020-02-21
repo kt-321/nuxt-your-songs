@@ -15,7 +15,13 @@ import { Component, Vue } from 'vue-property-decorator'
         titleTemplate: 'ダッシュボード | %s'
     }
 })
-export default class PageDashboard extends Vue {}
+export default class PageDashboard extends Vue {
+    mounted () {
+        if(this.$store.getters['user/isGuest']) {
+            this.$router.replace('/user/signin')
+        }
+    }
+}
 </script>
 
 <style lang="stylus"></style>

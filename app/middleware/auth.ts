@@ -11,8 +11,9 @@ export default async function({ app, route, redirect, store, $axios, $cookies }:
         }
         // 無視パターン
         const ignores = [
-            '/api/user/signin',
-            '/'
+            '/user/signin',
+            '/',
+            '/signup'
         ]
         for (let i = 0; i < ignores.length; i++) {
             const regex = new RegExp(ignores[i], 'g')
