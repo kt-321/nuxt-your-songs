@@ -5,12 +5,14 @@ export interface State {
     token: string | null
     isGuest: boolean
     user: ILoginUser | null
+    list: Array<ILoginUser>
 }
 export interface RootState {}
 export const state = (): State => ({
     token: null,
     isGuest: true,
-    user: null
+    user: null,
+    list: []
 })
 export const mutations: MutationTree<State> = {
     setToken(state, token: string) {
@@ -24,7 +26,10 @@ export const mutations: MutationTree<State> = {
             state.isGuest = true
             state.user = null
         }
-    }
+    },
+    setList(state, list: Array<ILoginUser>) {
+        state.list = list
+    },
 }
 export const actions: ActionTree<State, RootState> = {
     // アクセストークンを保存
@@ -48,6 +53,23 @@ export const actions: ActionTree<State, RootState> = {
             return Promise.reject(e)
         }
     },
+    setList(context, list: Array<ILoginUser>) {
+        context.commit('setList', list)
+    },
+    async sync(context) {
+        // 差し替え用リストを定義
+        const newList: Array<ILoginUser> = []
+    // ユーザーリスト取得通信メソッド
+        const loadUsers = async (page: number = 1) => {
+            try {
+                const result = await this.$axios.$get('/api/users')
+                context.commit('setList', result)
+            } catch (e) {
+                Promise.reject(e)
+            }
+        }
+        await loadUsers()
+    },
 }
 export const getters: GetterTree<State, RootState> = {
     token(state) {
@@ -65,5 +87,8 @@ export const getters: GetterTree<State, RootState> = {
     },
     user(state): ILoginUser | null {
         return state.user
+    },
+    list(state): Array<ILoginUser> {
+        return state.list
     },
 }
