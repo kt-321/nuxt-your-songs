@@ -11,6 +11,7 @@ import CTextInput from '~/components/ui/CTextInput.vue'
 import CLabel from '~/components/ui/CLabel.vue'
 import CLabeledItem from '~/components/ui/CLabeledItem.vue'
 import CDropdown from '~/components/ui/CDropdown.vue'
+import CMessage from '~/components/ui/CMessage.vue'
 
 Vue.mixin({
     components: {
@@ -24,7 +25,8 @@ Vue.mixin({
         CTextInput,
         CLabel,
         CLabeledItem,
-        CDropdown
+        CDropdown,
+        CMessage
     }
 })
 
