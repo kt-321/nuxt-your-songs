@@ -24,7 +24,7 @@ import { ILoginUser } from '~/types/user'
         CUserListItem
     }
 })
-export default class PageUsers extends Vue {
+export default class PageUserIndex extends Vue {
     users: Array<ILoginUser> = []
     // ユーザ一覧を読み込み
     async loadUsers() {
