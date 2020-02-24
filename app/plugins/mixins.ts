@@ -4,6 +4,7 @@ import NsPage from '~/components/layout/NsPage.vue'
 import NsForm from '~/components/layout/NsForm.vue'
 import NsColumn from '~/components/layout/NsColumn.vue'
 import NsModal from '~/components/layout/NsModal.vue'
+import NsPanel from '~/components/layout/NsPanel.vue'
 
 // components/ui
 import CButton from '~/components/ui/CButton.vue'
@@ -21,6 +22,7 @@ Vue.mixin({
         NsForm,
         NsColumn,
         NsModal,
+        NsPanel,
         // ui
         CButton,
         CTextInput,
