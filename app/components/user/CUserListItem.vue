@@ -1,5 +1,4 @@
 <template>
-    <!-- <li v-if="user" class="c-user-list-item" @click="selectUser"> -->
     <li v-if="user" class="c-user-list-item">
         <ns-column center>
             <div class="c-user-list-item-photo">
