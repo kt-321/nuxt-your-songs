@@ -4,6 +4,7 @@
             <div class="c-user-list-item-photo">
                 <img v-if="user.image_url" :src="user.image_url" />
                 <img v-else src="/img/user-icon.png" />
+                <nuxt-link :to="`/user/${user.id}`" class="button primary">ユーザー詳細へ</nuxt-link>
             </div>
             <table class="c-user-list-item-data table no-border">
                 <tbody>
@@ -65,10 +66,15 @@ export default class CUserListItem extends Vue {
     .c-user-list-item-photo
         flex: 0 0 200px !important
         height: 200px
+        position: relative
         background-color: #eee
         margin-right: 8px
         img
             width: 100%
+        .button
+            position: absolute
+            right: 8px
+            bottom: 8px
     .c-user-list-item-data
         flex: 1 1 auto !important
         tr:first-child
