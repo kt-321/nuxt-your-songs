@@ -59,7 +59,7 @@ export const actions: ActionTree<State, RootState> = {
     async sync(context) {
         // 差し替え用リストを定義
         const newList: Array<ILoginUser> = []
-    // ユーザーリスト取得通信メソッド
+        // ユーザーリスト取得通信メソッド
         const loadUsers = async (page: number = 1) => {
             try {
                 const result = await this.$axios.$get('/api/users')

@@ -1,7 +1,9 @@
 <template>
     <ns-page class="page-mypage">
         <ns-column>
-            <ns-form title="プロフィール設定">
+            <ns-form v-if="profileModel" title="プロフィール設定" bordered>
+                <c-message v-if="profileUpdated" success>プロフィールを変更しました</c-message>
+                <c-error :errors.sync="profileErrors" />
                 <c-labeled-item label="名前">
                     <c-text-input :model.sync="profileModel.name" />
                 </c-labeled-item>
@@ -20,7 +22,7 @@
                 <c-labeled-item label="好きなアーティスト">
                     <c-text-input :model.sync="profileModel.favorite_artist" />
                 </c-labeled-item>
-                <c-labeled-item label="自己紹介">
+                <c-labeled-item label="自己紹介（150文字以内）">
                     <c-text-input :model.sync="profileModel.comment" multiline />
                 </c-labeled-item>
                 <c-labeled-item>
@@ -34,6 +36,7 @@
 <script lang="ts">
 import _ from 'lodash'
 import { Component, Vue } from 'vue-property-decorator'
+import { ApplicationError, BadRequest } from '~/types/error'
 import { ILoginUser } from '~/types/user'
 @Component({
     head: {
@@ -41,8 +44,9 @@ import { ILoginUser } from '~/types/user'
     },
 })
 export default class PageMypage extends Vue {
-    profileModel = ""
-    user = ""
+    profileModel: ILoginUser | null = null
+    profileErrors: Array<ApplicationError> = []
+    profileUpdated: boolean = false
     genderItems = [
         { label: '男性', value: '1' },
         { label: '女性', value: '2' }
@@ -63,13 +67,26 @@ export default class PageMypage extends Vue {
         { label: '2000年代', value: '2000' },
         { label: '2010年代', value: '2010' }
     ]
-    async loadUser() {
-        const user = await this.$store.getters['user/user']
-        this.user = user
+    async saveProfileHandler() {
+        try {
+            this.profileUpdated = false
+            if (!this.profileModel) {
+                throw new BadRequest('プロフィール情報が取得できませんでした')
+            }
+            if (this.profileModel.name.trim().length === 0) {
+                throw new BadRequest('氏名が入力されていません')
+            }
+            if (this.profileModel.email.trim().length === 0) {
+                throw new BadRequest('メールアドレスが入力されていません')
+            }
+            const user = await this.$axios.$put(`api/user/update/${this.profileModel.id}`, this.profileModel)
+            this.$store.dispatch('user/setUser', user)
+            this.profileUpdated = true
+        } catch (e) {
+            this.profileErrors.push(e)
+        }
     }
-    async saveProfileHandler() {}
     mounted() {
-        this.loadUser()
         this.profileModel = _.cloneDeep(this.$store.getters['user/user'])
     }
 }
