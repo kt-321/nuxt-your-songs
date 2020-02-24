@@ -7,6 +7,9 @@
             <div v-if="!$store.getters['user/isGuest']" class="menu-wrapper">
                 <ul class="menu">
                     <li>
+                        <nuxt-link to="/song">曲一覧</nuxt-link>
+                    </li>
+                    <li>
                         <nuxt-link to="/user">ユーザ一覧</nuxt-link>
                     </li>
                     <li>
