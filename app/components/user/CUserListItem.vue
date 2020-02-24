@@ -10,7 +10,11 @@
                 <tbody>
                     <tr>
                         <th>名前</th>
-                        <td>{{ user.name }}</td>
+                        <td>
+                            <p class="item-header">
+                                <strong>{{ user.name }}</strong>
+                            </p>
+                        </td>
                     </tr>
                     <tr v-if="user.age">
                         <th>年齢</th>
