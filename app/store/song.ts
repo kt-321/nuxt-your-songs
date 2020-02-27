@@ -36,4 +36,14 @@ export const getters: GetterTree<State, RootState> = {
     list(state): Array<ISong> {
         return state.list
     },
+    // 指定の曲を取得
+    find: (state) => (song: ISong | null) => {
+        if (song === null) {
+            return null
+        }
+        return state.list.find((it) => it.id === song.id)
+    },
+    findId: (state) => (id: number) => {
+        return state.list.find((it) => it.id === id)
+    },
 }

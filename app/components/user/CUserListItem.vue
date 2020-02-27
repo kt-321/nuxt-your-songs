@@ -9,7 +9,7 @@
             <table class="c-user-list-item-data table no-border">
                 <tbody>
                     <tr>
-                        <th>名前</th>
+                        <th style="width: 130px">名前</th>
                         <td>
                             <p class="item-header">
                                 <strong>{{ user.name }}</strong>
