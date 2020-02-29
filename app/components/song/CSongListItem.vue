@@ -1,5 +1,5 @@
 <template>
-    <li v-if="song" class="c-song-list-item">
+    <li v-if="song" class="c-song-list-item" @click="selectSong">
         <ns-column center>
             <div class="c-song-list-item-photo">
                 <img v-if="song.image_url" :src="song.image_url" />
@@ -8,32 +8,24 @@
             <table class="c-song-list-item-data table no-border">
                 <tbody>
                     <tr>
-                        <th>曲名</th>
+                        <th style="width: 100px">曲名</th>
                         <td>
                             <p class="item-header">
                                 <strong>{{ song.title }}</strong>
                                 <span class="tags">
-                                    <span v-if="song.video_url" class="tag">映像あり</span>
+                                    <span v-if="song.video_url" class="tag video">映像あり</span>
+                                    <span v-if="song.description" class="tag description">曲紹介あり</span>
                                 </span>
                             </p>
                         </td>
                     </tr>
-                    <tr v-if="song.artist_name">
+                    <tr>
                         <th>アーティスト</th>
                         <td>{{ song.artist_name }}</td>
                     </tr>
-                    <tr v-if="song.music_age">
+                    <tr>
                         <th>曲の年代</th>
                         <td>{{ song.music_age }}年代</td>
-                    </tr>
-                    <tr v-if="song.description">
-                        <th>曲紹介</th>
-                        <td>{{ song.description }}</td>
-                    </tr>
-                    <tr>
-                        <th>映像</th>
-                        <td v-if="song.video_url">あり</td>
-                        <td v-else>なし</td>
                     </tr>
                 </tbody>
             </table>
@@ -47,6 +39,9 @@ import { ISong } from '~/types/song'
 @Component({})
 export default class CSongListItem extends Vue {
     @Prop(Object) song!: ISong
+
+    @Emit('c-select')
+    selectSong() {}
 }
 </script>
 
@@ -55,9 +50,11 @@ export default class CSongListItem extends Vue {
     padding: 8px 4px
     border-bottom: 1px solid #ddd
     cursor: pointer
+    &.selected
+        background-color: $highlight-color
     .c-song-list-item-photo
-        flex: 0 0 200px !important
-        height: 200px
+        flex: 0 0 120px !important
+        height: 120px
         position: relative
         background-color: #eee
         margin-right: 8px

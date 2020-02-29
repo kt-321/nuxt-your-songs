@@ -1,0 +1,94 @@
+<template>
+    <div v-if="song" class="c-song-detail-contributor">
+        <ns-card>
+            <table class="c-song-contributor-data table no-border">
+                <tbody>
+                    <tr>
+                        <td style="width: 120px">ユーザー名</td>
+                        <td style="width: 120px">
+                            <p class="item-header">
+                                <strong>{{ contributor.name }}</strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr v-if="contributor.age">
+                        <td>年齢</td>
+                        <td>{{ contributor.age }}代</td>
+                    </tr>
+                    <tr v-if="contributor.gender">
+                        <td>性別</td>
+                        <td>{{ contributor.gender | genderFormat}}</td>
+                    </tr>
+                    <tr v-if="contributor.favorite_music_age">
+                        <td>好きな音楽の年代</td>
+                        <td>{{ contributor.favorite_music_age }}年代</td>
+                    </tr>
+                    <tr v-if="contributor.favorite_artist">
+                        <td>好きなアーティスト</td>
+                        <td>{{ contributor.favorite_artist }}</td>
+                    </tr>
+                    <tr v-if="contributor.comment">
+                        <td>曲紹介</td>
+                        <td>{{ contributor.comment }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center">
+                <nuxt-link :to="`/user/${contributor.id}`" class="button primary">ユーザー詳細へ</nuxt-link>
+            </div>
+        </ns-card>
+    </div>
+</template>
+<script lang="ts">
+import { Component, Vue, Prop, Emit, Watch } from 'vue-property-decorator'
+import { ISong } from '~/types/song'
+import { ILoginUser } from '~/types/user'
+// import CSongDetailInfo from '~/components/song/detail/CSongDetailInfo.vue'
+// import { Isong, IsongCondition } from '~/types/song'
+@Component({
+    filters: {
+        genderFormat: (gender) => {
+            if (gender === 1) {
+                return '男性'
+            } else if (gender === 2) {
+                return '女性'
+            } else {
+                return '-'
+            }
+        }
+    }
+})
+export default class CsongDetailContributor extends Vue {
+    @Prop(Object) song!: ISong | null
+    contributor: ILoginUser = ""
+    // 曲一覧を読み込み
+    async loadContributor() {
+        const contributor = await this.$axios.$get(`/api/user/${this.song!.user_id}`)
+        // const contributor = await this.$axios.$get('/api/user/5')
+        this.contributor = contributor
+        console.log(contributor)
+    }
+    mounted () {
+        if(this.$store.getters['user/isGuest']) {
+            this.$router.replace('/user/signin')
+        }
+        this.loadContributor()
+    }
+    @Watch('song')
+    songChanged() {
+        this.loadContributor()
+    }
+}
+</script>
+<style lang="stylus">
+.c-song-detail-info
+    .card-layout
+        margin-bottom: 16px
+    .condition
+        td span
+            &:after
+                content: ','
+                padding-right: 8px
+            &:last-child:after
+                content: ''
+</style>
