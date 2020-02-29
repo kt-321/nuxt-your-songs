@@ -56,7 +56,6 @@
     </div>
 </template>
 <script lang="ts">
-import _ from 'lodash'
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { ISong } from '~/types/song'
 import { newSong } from '~/types/initializer'

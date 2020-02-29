@@ -31,6 +31,7 @@
 </template>
 
 <script lang="ts">
+import _ from 'lodash'
 import { Component, Vue } from 'vue-property-decorator'
 import CSongListItem from '~/components/song/CSongListItem.vue'
 import CSongDetail from '~/components/song/CSongDetail.vue'
