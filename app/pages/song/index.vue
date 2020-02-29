@@ -56,7 +56,6 @@ export default class PageSongIndex extends Vue {
             this.$router.replace('/user/signin')
         }
         this.loadSongs()
-        console.log(this.selectedSong)
     }
 }
 </script>

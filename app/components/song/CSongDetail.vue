@@ -1,53 +1,41 @@
 <template>
     <div v-if="song" class="c-song-detail">
-        <ns-card title="曲詳細">
-            <table class="c-song-list-item-data table no-border">
-                <tbody>
-                    <tr>
-                        <th style="width: 100px">曲名</th>
-                        <td>
-                            <p class="item-header">
-                                <strong>{{ song.title }}</strong>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>アーティスト</th>
-                        <td>{{ song.artist_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>曲の年代</th>
-                        <td>{{ song.music_age }}年代</td>
-                    </tr>
-                    <tr v-if="song.description">
-                        <th>曲紹介</th>
-                        <td>{{ song.description }}</td>
-                    </tr>
-                    <tr>
-                        <th>投稿日時</th>
-                        <td>{{ song.created_at }}</td>
-                    </tr>
-                    <tr>
-                        <th>更新日時</th>
-                        <td>{{ song.updated_at }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div v-if="song.video_url">
-                動画をここに表示TODO
+        <div>
+            <div class="heading">
+                <ul class="tabs">
+                    <li v-for="(tab, index) in tabs" :key="index" class="tab" :class="{ active: selectedTab === tab.key }" @click="selectedTab = tab.key">
+                        {{ tab.label }}
+                    </li>
+                </ul>
             </div>
-        </ns-card>
+            <c-song-detail-info
+                v-if="selectedTab === 0"
+                :song="song"
+                class="tab-content"
+            />
+            <c-song-detail-contributor v-if="selectedTab === 1" :song="song" class="tab-content" />
+        </div>
     </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { ISong } from '~/types/song'
+import CSongDetailInfo from '~/components/song/detail/CSongDetailInfo.vue'
+import CSongDetailContributor from '~/components/song/detail/CSongDetailContributor.vue'
 @Component({
     components: {
+        CSongDetailInfo,
+        CSongDetailContributor
     }
 })
 export default class CSongDetail extends Vue {
     @Prop(Object) song!: ISong
+    // タブ
+    selectedTab: number = 0
+    tabs: Array<any> = [
+        { label: '曲情報', key: 0 },
+        { label: '投稿者', key: 1 }
+    ]
 }
 </script>
 <style lang="stylus">
