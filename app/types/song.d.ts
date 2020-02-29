@@ -1,9 +1,9 @@
 export interface ISong {
-    id: number
-    user_id: number
+    id: number | null
+    user_id: number | null
     title: string
     artist_name: string
-    music_age: number
+    music_age: number | null
     description: string | null
     image_url: string | null
     video_url: string | null

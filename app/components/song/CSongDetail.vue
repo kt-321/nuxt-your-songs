@@ -12,6 +12,7 @@
                 v-if="selectedTab === 0"
                 :song="song"
                 class="tab-content"
+                @edit-handler="editButtonHandler"
             />
             <c-song-detail-contributor v-if="selectedTab === 1" :song="song" class="tab-content" />
         </div>
@@ -20,12 +21,15 @@
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { ISong } from '~/types/song'
+import { newSong } from '~/types/initializer'
 import CSongDetailInfo from '~/components/song/detail/CSongDetailInfo.vue'
 import CSongDetailContributor from '~/components/song/detail/CSongDetailContributor.vue'
+import CSongEdit from '~/components/song/CSongEdit.vue'
 @Component({
     components: {
         CSongDetailInfo,
-        CSongDetailContributor
+        CSongDetailContributor,
+        CSongEdit
     }
 })
 export default class CSongDetail extends Vue {
@@ -36,6 +40,11 @@ export default class CSongDetail extends Vue {
         { label: '曲情報', key: 0 },
         { label: '投稿者', key: 1 }
     ]
+    editModalModel: ISong = newSong()
+    editModalVisible: boolean = false
+    
+    @Emit('c-song-detail-edit')
+    editButtonHandler() {}
 }
 </script>
 <style lang="stylus">
