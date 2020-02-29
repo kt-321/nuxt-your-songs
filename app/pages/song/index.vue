@@ -20,6 +20,7 @@
                 class="song-detail"
                 :song="selectedSong"
                 @c-song-detail-edit="editButtonHandler"
+                @c-song-detail-delete="deleteButtonHandler"
             />
             <div v-else class="song-detail">
                 <c-message warning>曲リストから曲を選択してください</c-message>
@@ -67,6 +68,16 @@ export default class PageSongIndex extends Vue {
         if(this.selectedSong){
             this.songModalModel = _.cloneDeep(this.selectedSong)
             this.songModalVisible = true
+        }
+    }
+    // 削除ボタンハンドラ
+    async deleteButtonHandler() {
+        if (this.selectedSong) {
+            if (confirm(`曲「${this.selectedSong.title}」を削除します。よろしいですか？`)) {
+                await this.$axios.$delete(`/api/song/${this.selectedSong.id}`)
+                this.selectedSong = null
+                this.loadSongs()
+            }
         }
     }
     // 曲の編集完了後に曲一覧を再読み込み
