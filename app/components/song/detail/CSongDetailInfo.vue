@@ -8,6 +8,7 @@
                         <td style-="width: 120px">
                             <p class="item-header">
                                 <strong>{{ song.title }}</strong>
+                                <span v-if="song.user_id === $store.getters['user/user'].id" class="tag self">自分の投稿</span>
                             </p>
                         </td>
                     </tr>

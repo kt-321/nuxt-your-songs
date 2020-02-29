@@ -8,6 +8,7 @@
                         <td style="width: 120px">
                             <p class="item-header">
                                 <strong>{{ contributor.name }}</strong>
+                                <span v-if="song.user_id === $store.getters['user/user'].id" class="tag self">自分</span>
                             </p>
                         </td>
                     </tr>
@@ -17,7 +18,7 @@
                     </tr>
                     <tr v-if="contributor.gender">
                         <td>性別</td>
-                        <td>{{ contributor.gender | genderFormat}}</td>
+                        <td>{{ contributor.gender | genderFormat }}</td>
                     </tr>
                     <tr v-if="contributor.favorite_music_age">
                         <td>好きな音楽の年代</td>
@@ -34,7 +35,8 @@
                 </tbody>
             </table>
             <div style="text-align: center">
-                <nuxt-link :to="`/user/${contributor.id}`" class="button primary">ユーザー詳細へ</nuxt-link>
+                <nuxt-link v-if="song.user_id === $store.getters['user/user'].id" to="/user/mypage" class="button primary">マイページへ</nuxt-link>
+                <nuxt-link v-else to="`/user/${contributor.id}`" class="button primary">ユーザー詳細へ</nuxt-link>
             </div>
         </m-card>
     </div>

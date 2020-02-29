@@ -13,6 +13,7 @@
                             <p class="item-header">
                                 <strong>{{ song.title }}</strong>
                                 <span class="tags">
+                                    <span v-if="song.user_id === $store.getters['user/user'].id" class="tag self">自分の投稿</span>
                                     <span v-if="song.video_url" class="tag video">映像あり</span>
                                     <span v-if="song.description" class="tag description">曲紹介あり</span>
                                 </span>
@@ -76,6 +77,6 @@ export default class CSongListItem extends Vue {
                     justify-content: space-between
                     .tags
                         text-align: right
-                        .tag
-                            margin-left: 8px
+                        // .tag
+                        //     margin-left: 4px
 </style>
