@@ -1,5 +1,5 @@
 <template>
-    <ns-page class="page-signin" title="ログイン">
+    <m-page class="page-signin" title="ログイン">
         <div>
             <div>
                 <label>Email</label>
@@ -11,7 +11,7 @@
             </div>
             <button @click="login">ログイン</button>
         </div>        
-    </ns-page>
+    </m-page>
 </template>
 
 <script lang="ts">

@@ -1,7 +1,7 @@
 <template>
-    <ns-page class="page-mypage">
-        <ns-column>
-            <ns-form v-if="profileModel" title="プロフィール設定" bordered>
+    <m-page class="page-mypage">
+        <m-column>
+            <m-form v-if="profileModel" title="プロフィール設定" bordered>
                 <c-message v-if="profileUpdated" success>プロフィールを変更しました</c-message>
                 <c-error :errors.sync="profileErrors" />
                 <c-labeled-item label="名前">
@@ -28,10 +28,10 @@
                 <c-labeled-item>
                     <c-button small primary label="保存" @c-click="saveProfileHandler()" />
                 </c-labeled-item>
-            </ns-form>
+            </m-form>
             <div>投稿してる曲などをここに表示</div>
-        </ns-column>
-    </ns-page>
+        </m-column>
+    </m-page>
 </template>
 <script lang="ts">
 import _ from 'lodash'

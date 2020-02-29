@@ -9,9 +9,9 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component({
-    name: 'ns-form'
+    name: 'm-form'
 })
-export default class NsForm extends Vue {
+export default class MForm extends Vue {
     // フォームタイトル
     @Prop({ type: String, default: null }) title?: string
     // ボーダーをつけるか

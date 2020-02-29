@@ -1,6 +1,6 @@
 <template>
     <li v-if="song" class="c-song-list-item" @click="selectSong">
-        <ns-column center>
+        <m-column center>
             <div class="c-song-list-item-photo">
                 <img v-if="song.image_url" :src="song.image_url" />
                 <img v-else src="/img/song-icon.jpeg" />
@@ -29,7 +29,7 @@
                     </tr>
                 </tbody>
             </table>
-        </ns-column>
+        </m-column>
     </li>
 </template>
 

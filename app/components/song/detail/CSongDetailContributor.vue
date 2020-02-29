@@ -1,6 +1,6 @@
 <template>
     <div v-if="song" class="c-song-detail-contributor">
-        <ns-card>
+        <m-card>
             <table class="c-song-contributor-data table no-border">
                 <tbody>
                     <tr>
@@ -36,15 +36,13 @@
             <div style="text-align: center">
                 <nuxt-link :to="`/user/${contributor.id}`" class="button primary">ユーザー詳細へ</nuxt-link>
             </div>
-        </ns-card>
+        </m-card>
     </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, Emit, Watch } from 'vue-property-decorator'
 import { ISong } from '~/types/song'
 import { ILoginUser } from '~/types/user'
-// import CSongDetailInfo from '~/components/song/detail/CSongDetailInfo.vue'
-// import { Isong, IsongCondition } from '~/types/song'
 @Component({
     filters: {
         genderFormat: (gender) => {
@@ -64,7 +62,6 @@ export default class CsongDetailContributor extends Vue {
     // 曲一覧を読み込み
     async loadContributor() {
         const contributor = await this.$axios.$get(`/api/user/${this.song!.user_id}`)
-        // const contributor = await this.$axios.$get('/api/user/5')
         this.contributor = contributor
         console.log(contributor)
     }

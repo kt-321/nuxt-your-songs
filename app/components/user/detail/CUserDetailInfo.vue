@@ -1,5 +1,5 @@
 <template>
-    <ns-panel v-if="user" class="c-user-detail-info">
+    <m-panel v-if="user" class="c-user-detail-info">
         <table class="table no-border">
             <tbody>
                 <tr>
@@ -28,7 +28,7 @@
                 </tr>
             </tbody>
         </table>
-    </ns-panel>
+    </m-panel>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'

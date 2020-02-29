@@ -1,5 +1,5 @@
 <template>
-    <ns-page class="page-user-index">
+    <m-page class="page-user-index">
         <ul class="user-list">
             <li v-if="users.length > 0">
                 全ユーザー数: {{ users.length }}名
@@ -9,7 +9,7 @@
             </li>
             <c-user-list-item v-for="user in users" :key="user.id" :user="user" />
         </ul>
-    </ns-page>
+    </m-page>
 </template>
 
 <script lang="ts">

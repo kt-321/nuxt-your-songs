@@ -1,11 +1,11 @@
 <template>
-    <ns-page class="page-user-detail">
+    <m-page class="page-user-detail">
         <!-- ヘッダ -->
         <c-message light style="margin-bottom: 16px" class="page-heading">
             <h1>{{ user.name }}</h1>
         </c-message>
         <!-- メインコンテンツ -->
-        <ns-column v-if="user" :column="2">
+        <m-column v-if="user" :column="2">
             <!-- ユーザー情報 -->
             <div class="user-summary">
                 <!-- トップ画像 -->
@@ -13,16 +13,16 @@
                 <!-- ユーザー情報 -->
                 <c-user-detail-info :user="user" />
                 <!-- ボタンエリア -->
-                <ns-panel class="button-area">
+                <m-panel class="button-area">
                     ここにボタンを作成
-                </ns-panel>
+                </m-panel>
             </div>
             <!-- ユーザー詳細 -->
             <div class="user-detail">
                 ここに投稿している曲などを表示
             </div>
-        </ns-column>
-    </ns-page>
+        </m-column>
+    </m-page>
 </template>
 <script lang="ts">
 import _ from 'lodash'

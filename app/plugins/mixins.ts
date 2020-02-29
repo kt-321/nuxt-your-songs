@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
-import NsPage from '~/components/layout/NsPage.vue'
-import NsForm from '~/components/layout/NsForm.vue'
-import NsColumn from '~/components/layout/NsColumn.vue'
-import NsModal from '~/components/layout/NsModal.vue'
-import NsPanel from '~/components/layout/NsPanel.vue'
-import NsCard from '~/components/layout/NsCard.vue'
+import MPage from '~/components/layout/MPage.vue'
+import MForm from '~/components/layout/MForm.vue'
+import MColumn from '~/components/layout/MColumn.vue'
+import MModal from '~/components/layout/MModal.vue'
+import MPanel from '~/components/layout/MPanel.vue'
+import MCard from '~/components/layout/MCard.vue'
 
 // components/ui
 import CButton from '~/components/ui/CButton.vue'
@@ -19,12 +19,12 @@ import CError from '~/components/ui/CError.vue'
 Vue.mixin({
     components: {
         // layout
-        NsPage,
-        NsForm,
-        NsColumn,
-        NsModal,
-        NsPanel,
-        NsCard,
+        MPage,
+        MForm,
+        MColumn,
+        MModal,
+        MPanel,
+        MCard,
         // ui
         CButton,
         CTextInput,
