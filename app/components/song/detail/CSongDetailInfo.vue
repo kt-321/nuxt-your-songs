@@ -37,42 +37,37 @@
             <div v-if="song.video_url">
                 動画をここに表示TODO
             </div>
+            <c-button
+                v-if="song.user_id === $store.getters['user/user'].id"
+                small
+                block
+                label="曲情報を編集"
+                @c-click="editButtonHandler"
+            />
         </m-card>
     </div>
 </template>
 <script lang="ts">
+import _ from 'lodash'
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { ISong } from '~/types/song'
-// import CSongDetailInfo from '~/components/song/detail/CSongDetailInfo.vue'
-// import { Isong, IsongCondition } from '~/types/song'
-@Component({})
+import { newSong } from '~/types/initializer'
+import CSongEdit from '~/components/song/CSongEdit.vue'
+@Component({
+    components: {
+        CSongEdit
+    }
+})
 export default class CsongDetailInfo extends Vue {
-    @Prop(Object) song!: ISong | null
-    // conditionVisible(condition: IsongCondition) {
-    //     if (condition) {
-    //         if (condition.price.length > 0) {
-    //             return true
-    //         }
-    //         if (condition.use.length > 0) {
-    //             return true
-    //         }
-    //         if (condition.area.trim().length > 0) {
-    //             return true
-    //         }
-    //     }
-    //     return false
-    // }
+    @Prop(Object) song!: ISong
+    editModalModel: ISong = newSong()
+    editModalVisible: boolean = false
+    @Emit('edit-handler')
+    editButtonHandler() {}
 }
 </script>
 <style lang="stylus">
 .c-song-detail-info
     .card-layout
         margin-bottom: 16px
-    .condition
-        td span
-            &:after
-                content: ','
-                padding-right: 8px
-            &:last-child:after
-                content: ''
 </style>

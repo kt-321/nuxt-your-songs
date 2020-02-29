@@ -1,5 +1,8 @@
 <template>
     <m-page class="page-song-index">
+        <c-song-search
+            @add-handler="addSongHandler"
+        />
         <m-column>
             <ul class="song-list">
                 <li v-if="songs.length > 0">
@@ -16,11 +19,13 @@
                 v-if="selectedSong"
                 class="song-detail"
                 :song="selectedSong"
+                @c-song-detail-edit="editButtonHandler"
             />
             <div v-else class="song-detail">
                 <c-message warning>曲リストから曲を選択してください</c-message>
             </div>
         </m-column>
+        <c-song-edit :visible.sync="songModalVisible" :model.sync="songModalModel" @c-song-edit-finished="songEditFinished" />
     </m-page>
 </template>
 
@@ -28,14 +33,19 @@
 import { Component, Vue } from 'vue-property-decorator'
 import CSongListItem from '~/components/song/CSongListItem.vue'
 import CSongDetail from '~/components/song/CSongDetail.vue'
+import CSongEdit from '~/components/song/CSongEdit.vue'
+import CSongSearch from '~/components/song/CSongSearch.vue'
 import { ISong } from '~/types/song'
+import { newSong } from '~/types/initializer'
 @Component({
     head: {
         titleTemplate: '曲一覧 | %s'
     },
     components: {
         CSongListItem,
-        CSongDetail
+        CSongDetail,
+        CSongEdit,
+        CSongSearch
     }
 })
 export default class PageSongIndex extends Vue {
@@ -44,6 +54,24 @@ export default class PageSongIndex extends Vue {
     selectedSong: ISong | null = null
     selectSong(song: ISong | null) {
         this.selectedSong = song
+    }
+    songModalModel: ISong = newSong()
+    songModalVisible: boolean = false
+    // 曲を追加
+    addSongHandler() {
+        this.songModalModel = newSong()
+        this.songModalVisible = true
+    }
+    // 曲を編集
+    editButtonHandler() {
+        if(this.selectedSong){
+            this.songModalModel = _.cloneDeep(this.selectedSong)
+            this.songModalVisible = true
+        }
+    }
+    // 曲の編集完了後に曲一覧を再読み込み
+    async songEditFinished() {
+        this.loadSongs()
     }
     // 曲一覧を読み込み
     async loadSongs() {

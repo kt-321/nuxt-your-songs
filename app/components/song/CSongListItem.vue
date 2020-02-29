@@ -77,6 +77,4 @@ export default class CSongListItem extends Vue {
                     justify-content: space-between
                     .tags
                         text-align: right
-                        // .tag
-                        //     margin-left: 4px
 </style>

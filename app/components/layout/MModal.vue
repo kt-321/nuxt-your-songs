@@ -56,10 +56,9 @@ export default class MModal extends Vue {
 .m-modal
     z-index 999
     position fixed
-    top 0
+    top 4%
     left 0
     width 100%
-    height 100%
     &-bg
         width: 100vw
         height: 100vh
@@ -72,7 +71,7 @@ export default class MModal extends Vue {
         position: absolute
         top: 50%
         left: 50%
-        transform: translate(-50%, -50%)
+        transform: translate(-50%, 0%)
         z-index: 1000
         background: #fff
         border-radius: 3px
@@ -80,7 +79,6 @@ export default class MModal extends Vue {
         text-align left
         color #333
         overflow: hidden
-        // overflow-y scroll
         padding: 0
         // 下部ボタン
         &-bottom
