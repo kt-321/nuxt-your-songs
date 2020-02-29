@@ -1,6 +1,6 @@
 <template>
     <li v-if="user" class="c-user-list-item">
-        <ns-column center>
+        <m-column center>
             <div class="c-user-list-item-photo">
                 <img v-if="user.image_url" :src="user.image_url" />
                 <img v-else src="/img/user-icon.png" />
@@ -38,7 +38,7 @@
                     </tr>
                 </tbody>
             </table>
-        </ns-column>
+        </m-column>
     </li>
 </template>
 <script lang="ts">

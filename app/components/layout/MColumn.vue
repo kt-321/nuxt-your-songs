@@ -6,9 +6,9 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component({
-    name: 'ns-column'
+    name: 'm-column'
 })
-export default class NsColumn extends Vue {
+export default class MColumn extends Vue {
     // カラム数
     @Prop({ type: Number, default: 2 }) column!: number
     // 横位置

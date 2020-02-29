@@ -1,5 +1,5 @@
 <template>
-    <ns-page class="page-signup" title="ユーザー登録">
+    <m-page class="page-signup" title="ユーザー登録">
         <div>
             <div>
                 <label>お名前</label>
@@ -19,7 +19,7 @@
             </div>
             <button @click="signup">上記の内容で登録</button>
         </div>        
-    </ns-page>
+    </m-page>
 </template>
 
 <script lang="ts">

@@ -9,9 +9,9 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component({
-    name: 'ns-page'
+    name: 'm-page'
 })
-export default class NsPage extends Vue {
+export default class MPage extends Vue {
     // ページタイトル
     @Prop({ type: String, default: null }) title?: string
 }

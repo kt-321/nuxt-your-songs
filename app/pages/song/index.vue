@@ -1,6 +1,6 @@
 <template>
-    <ns-page class="page-song-index">
-        <ns-column>
+    <m-page class="page-song-index">
+        <m-column>
             <ul class="song-list">
                 <li v-if="songs.length > 0">
                     全曲数: {{ songs.length }}曲
@@ -20,8 +20,8 @@
             <div v-else class="song-detail">
                 <c-message warning>曲リストから曲を選択してください</c-message>
             </div>
-        </ns-column>
-    </ns-page>
+        </m-column>
+    </m-page>
 </template>
 
 <script lang="ts">

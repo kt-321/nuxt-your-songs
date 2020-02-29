@@ -1,6 +1,6 @@
 <template>
     <div v-if="song" class="c-song-detail-info">
-        <ns-card>
+        <m-card>
             <table class="c-song-list-item-data table no-border">
                 <tbody>
                     <tr>
@@ -36,7 +36,7 @@
             <div v-if="song.video_url">
                 動画をここに表示TODO
             </div>
-        </ns-card>
+        </m-card>
     </div>
 </template>
 <script lang="ts">

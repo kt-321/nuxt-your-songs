@@ -1,22 +1,22 @@
 <template>
-    <div v-if="syncVisible" class="ns-modal">
-        <div class="ns-modal-bg" />
-        <div class="ns-modal-container" :style="{ width: width, height: height }">
-            <div v-if="isHeader" class="ns-modal-container-title">
+    <div v-if="syncVisible" class="m-modal">
+        <div class="m-modal-bg" />
+        <div class="m-modal-container" :style="{ width: width, height: height }">
+            <div v-if="isHeader" class="m-modal-container-title">
                 {{ title }}
             </div>
             <div
-                class="ns-modal-container-content"
-                :class="{ 'ns-modal-container-content-none-button': !isButton, 'ns-modal-container-content-button': isButton }"
+                class="m-modal-container-content"
+                :class="{ 'm-modal-container-content-none-button': !isButton, 'm-modal-container-content-button': isButton }"
             >
                 <slot />
             </div>
-            <div v-if="isButton && !isOnlyClose" class="ns-modal-container-bottom">
-                <c-button class="ns-modal-container-bottom-button" label="キャンセル" @c-click="cancelButton()" />
-                <c-button class="ns-modal-container-bottom-button" :label="confirmButtonTitle" primary @c-click="confirmButton()" />
+            <div v-if="isButton && !isOnlyClose" class="m-modal-container-bottom">
+                <c-button class="m-modal-container-bottom-button" label="キャンセル" @c-click="cancelButton()" />
+                <c-button class="m-modal-container-bottom-button" :label="confirmButtonTitle" primary @c-click="confirmButton()" />
             </div>
-            <div v-else-if="isOnlyClose" class="ns-modal-container-bottom">
-                <c-button class="ns-modal-container-bottom-button" label="閉じる" @c-click="cancelButton()" />
+            <div v-else-if="isOnlyClose" class="m-modal-container-bottom">
+                <c-button class="m-modal-container-bottom-button" label="閉じる" @c-click="cancelButton()" />
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@ interface modalContent {
     body?: string
 }
 @Component
-export default class NsModal extends Vue {
+export default class MModal extends Vue {
     // モーダルの横幅(px)
     @Prop({ type: String, default: '512px' }) width!: string
     // モーダルの縦幅
@@ -53,7 +53,7 @@ export default class NsModal extends Vue {
 }
 </script>
 <style lang="stylus">
-.ns-modal
+.m-modal
     z-index 999
     position fixed
     top 0

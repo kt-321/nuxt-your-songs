@@ -1,7 +1,7 @@
 <template>
-    <section class="panel-layout" :class="getClass">
-        <h3 v-if="title && title.length > 0" class="panel-title">{{ title }}</h3>
-        <div class="panel-content">
+    <section class="card-layout" :class="getClass">
+        <h3 v-if="title && title.length > 0" class="card-title">{{ title }}</h3>
+        <div class="card-content">
             <slot />
         </div>
     </section>
@@ -9,9 +9,9 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component({
-    name: 'ns-panel'
+    name: 'm-card'
 })
-export default class NsPanel extends Vue {
+export default class MCard extends Vue {
     // パネルタイトル
     @Prop({ type: String, default: null }) title?: string
     // カラーリング
@@ -39,88 +39,90 @@ export default class NsPanel extends Vue {
 }
 </script>
 <style lang="stylus">
-.panel-layout
+.card-layout
     position: relative
-    .panel-title
+    .card-title
         position: relative
-        padding: $panel-title-padding
-        font-size: $font-medium
+        padding: $card-title-padding
+        font-size: $font-normal
         font-weight: 400
         color: $secondary-color
         background-color: $secondary-bg-color
         border: 1px solid $secondary-border-color
         border-bottom: 0
-        border-top-left-radius: $panel-border-radius
-        border-top-right-radius: $panel-border-radius
-    .panel-content
-        padding: $panel-content-padding
+        border-top-left-radius: $card-border-radius
+        border-top-right-radius: $card-border-radius
+        margin-bottom 0
+    .card-content
+        background-color: #fff
+        padding: $card-content-padding
         border: 1px solid $secondary-border-color
         border-top: 0
-        border-bottom-left-radius: $panel-border-radius
-        border-bottom-right-radius: $panel-border-radius
+        border-bottom-left-radius: $card-border-radius
+        border-bottom-right-radius: $card-border-radius
         > *
-            margin-bottom: $panel-content-margin-bottom
+            margin-bottom: $card-content-margin-bottom
             &:last-child
                 margin-bottom: 0
     &.title-disabled
-        .panel-content
+        .card-content
             border-top: 1px solid $secondary-border-color
-            border-top-left-radius: $panel-border-radius
-            border-top-right-radius: $panel-border-radius
+            border-top-left-radius: $card-border-radius
+            border-top-right-radius: $card-border-radius
     &.primary
-        .panel-title
+        .card-title
             color: $primary-color
             background-color: $primary-bg-color
             border-color: $primary-border-color
-        .panel-content
+        .card-content
             border-color: $primary-border-color
     &.secondary
-        .panel-title
+        .card-title
             color: $secondary-color
             background-color: $secondary-bg-color
             border-color: $secondary-border-color
-        .panel-content
+        .card-content
             border-color: $secondary-border-color
     &.light
-        .panel-title
+        .card-title
             color: $light-color
             background-color: $light-bg-color
             border-color: $light-border-color
-        .panel-content
+        .card-content
             border-color: $light-border-color
     &.dark
-        .panel-title
+        .card-title
             color: $dark-color
             background-color: $dark-bg-color
             border-color: $dark-border-color
-        .panel-content
+        .card-content
             border-color: $dark-border-color
     &.info
-        .panel-title
+        .card-title
             color: $info-color
             background-color: $info-bg-color
             border-color: $info-border-color
-        .panel-content
+        .card-content
             border-color: $info-border-color
     &.success
-        .panel-title
+        .card-title
             color: $success-color
             background-color: $success-bg-color
             border-color: $success-border-color
-        .panel-content
+        .card-content
             border-color: $success-border-color
     &.warning
-        .panel-title
+        .card-title
             color: $warning-color
             background-color: $warning-bg-color
             border-color: $warning-border-color
-        .panel-content
+        .card-content
             border-color: $warning-border-color
     &.danger
-        .panel-title
+        .card-title
             color: $danger-color
             background-color: $danger-bg-color
             border-color: $danger-border-color
-        .panel-content
+        .card-content
             border-color: $danger-border-color
 </style>

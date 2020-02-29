@@ -1,10 +1,10 @@
 <template>
-    <ns-page class="page-dashboard">
+    <m-page class="page-dashboard">
         <div>
             <p>ダッシュボード</p>
             <pre>{{ $store.getters['user/user'] }}</pre>
         </div>
-    </ns-page>
+    </m-page>
 </template>
 
 <script lang="ts">
