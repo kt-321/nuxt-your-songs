@@ -41,8 +41,16 @@
                 v-if="song.user_id === $store.getters['user/user'].id"
                 small
                 block
-                label="曲情報を編集"
+                label="編集"
                 @c-click="editButtonHandler"
+            />
+            <c-button
+                v-if="song.user_id === $store.getters['user/user'].id"
+                danger
+                small
+                block
+                label="削除"
+                @c-click="deleteButtonHandler"
             />
         </m-card>
     </div>
@@ -58,12 +66,16 @@ import CSongEdit from '~/components/song/CSongEdit.vue'
         CSongEdit
     }
 })
-export default class CsongDetailInfo extends Vue {
+export default class CSongDetailInfo extends Vue {
     @Prop(Object) song!: ISong
     editModalModel: ISong = newSong()
     editModalVisible: boolean = false
+
     @Emit('edit-handler')
     editButtonHandler() {}
+    
+    @Emit('delete-handler')
+    deleteButtonHandler() {}
 }
 </script>
 <style lang="stylus">
