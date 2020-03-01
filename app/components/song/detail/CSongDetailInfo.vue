@@ -52,11 +52,25 @@
                 label="削除"
                 @c-click="deleteButtonHandler"
             />
+            <c-button
+                v-if="song.user_id !== $store.getters['user/user'].id && !song.is_bookmarked" 
+                small
+                block
+                label="お気に入りに登録する"
+                @c-click="bookmarkButtonHandler"
+            />
+            <c-button
+                v-if="song.user_id !== $store.getters['user/user'].id && song.is_bookmarked"
+                warning
+                small
+                block
+                label="お気に入りから外す"
+                @c-click="removeBookmarkButtonHandler"
+            />
         </m-card>
     </div>
 </template>
 <script lang="ts">
-import _ from 'lodash'
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { ISong } from '~/types/song'
 import { newSong } from '~/types/initializer'
@@ -76,6 +90,12 @@ export default class CSongDetailInfo extends Vue {
     
     @Emit('delete-handler')
     deleteButtonHandler() {}
+
+    @Emit('bookmark-handler')
+    bookmarkButtonHandler() {}
+    
+    @Emit('remove-bookmark-handler')
+    removeBookmarkButtonHandler() {}
 }
 </script>
 <style lang="stylus">

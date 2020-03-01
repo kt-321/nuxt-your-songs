@@ -36,7 +36,7 @@
             </table>
             <div style="text-align: center">
                 <nuxt-link v-if="song.user_id === $store.getters['user/user'].id" to="/user/mypage" class="button primary">マイページへ</nuxt-link>
-                <nuxt-link v-else to="`/user/${contributor.id}`" class="button primary">ユーザー詳細へ</nuxt-link>
+                <nuxt-link v-else :to="`/user/${contributor.id}`" class="button primary">ユーザー詳細へ</nuxt-link>
             </div>
         </m-card>
     </div>
@@ -65,7 +65,6 @@ export default class CsongDetailContributor extends Vue {
     async loadContributor() {
         const contributor = await this.$axios.$get(`/api/user/${this.song!.user_id}`)
         this.contributor = contributor
-        console.log(contributor)
     }
     mounted () {
         if(this.$store.getters['user/isGuest']) {
