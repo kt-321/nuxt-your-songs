@@ -14,6 +14,8 @@
                 class="tab-content"
                 @edit-handler="editButtonHandler"
                 @delete-handler="deleteButtonHandler"
+                @bookmark-handler="bookmarkButtonHandler"
+                @remove-bookmark-handler="removeBookmarkButtonHandler"
             />
             <c-song-detail-contributor v-if="selectedTab === 1" :song="song" class="tab-content" />
         </div>
@@ -49,6 +51,12 @@ export default class CSongDetail extends Vue {
     
     @Emit('c-song-detail-delete')
     deleteButtonHandler() {}
+
+    @Emit('c-song-detail-bookmark')
+    bookmarkButtonHandler() {}
+
+    @Emit('c-song-detail-remove-bookmark')
+    removeBookmarkButtonHandler() {}
 }
 </script>
 <style lang="stylus">

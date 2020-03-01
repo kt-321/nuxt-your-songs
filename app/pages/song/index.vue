@@ -21,6 +21,8 @@
                 :song="selectedSong"
                 @c-song-detail-edit="editButtonHandler"
                 @c-song-detail-delete="deleteButtonHandler"
+                @c-song-detail-bookmark="bookmarkButtonHandler"
+                @c-song-detail-remove-bookmark="removeBookmarkButtonHandler"
             />
             <div v-else class="song-detail">
                 <c-message warning>曲リストから曲を選択してください</c-message>
@@ -79,6 +81,20 @@ export default class PageSongIndex extends Vue {
                 this.selectedSong = null
                 this.loadSongs()
             }
+        }
+    }
+    // 曲をお気に入り登録する
+    async bookmarkButtonHandler() {
+        if (this.selectedSong) {
+            await this.$axios.$post(`/api/song/${this.selectedSong.id}/bookmark`)
+            this.loadSongs()
+        }
+    }
+    // 曲をお気に入りから外す
+    async removeBookmarkButtonHandler() {
+        if (this.selectedSong) {
+            await this.$axios.$post(`/api/song/${this.selectedSong.id}/removeBookmark`)
+            this.loadSongs()
         }
     }
     // 曲の編集完了後に曲一覧を再読み込み

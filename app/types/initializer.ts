@@ -11,6 +11,7 @@ export function newSong(): ISong {
         video_url: null,
         created_at: '',
         updated_at: '',
-        deleted_at: null
+        deleted_at: null,
+        is_bookmarked: false
     }
 }
