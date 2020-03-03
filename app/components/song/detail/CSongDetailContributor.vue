@@ -34,9 +34,24 @@
                     </tr>
                 </tbody>
             </table>
-            <div style="text-align: center">
+            <div style="text-align: center;">
+                <c-button
+                    v-if="contributor.id !== $store.getters['user/user'].id && !contributor.is_followed" 
+                    small
+                    block
+                    label="フォローする"
+                    @c-click="followHandler"
+                />
+                <c-button
+                    v-if="contributor.id !== $store.getters['user/user'].id && contributor.is_followed" 
+                    small
+                    block
+                    warning
+                    label="フォロー中"
+                    @c-click="unfollowHandler"
+                />
                 <nuxt-link v-if="song.user_id === $store.getters['user/user'].id" to="/user/mypage" class="button primary">マイページへ</nuxt-link>
-                <nuxt-link v-else :to="`/user/${contributor.id}`" class="button primary">ユーザー詳細へ</nuxt-link>
+                <nuxt-link v-else :to="`/user/${contributor.id}`" class="button primary" style= "margin-top: 3px;">ユーザー詳細へ</nuxt-link>
             </div>
         </m-card>
     </div>
@@ -61,17 +76,33 @@ import { ILoginUser } from '~/types/user'
 export default class CsongDetailContributor extends Vue {
     @Prop(Object) song!: ISong | null
     contributor: ILoginUser = ""
-    // 曲一覧を読み込み
+
+    // 投稿者一覧を読み込み
     async loadContributor() {
         const contributor = await this.$axios.$get(`/api/user/${this.song!.user_id}`)
         this.contributor = contributor
+        {{ contributor }}
     }
+
+    // ユーザーをフォローする
+    async followHandler() {
+        await this.$axios.$post(`/api/user/${this.contributor.id}/follow`)
+        this.loadContributor()
+    }
+
+    // ユーザーをフォローを外す
+    async unfollowHandler() {
+        await this.$axios.$post(`/api/user/${this.contributor.id}/unfollow`)
+        this.loadContributor()
+    }
+
     mounted () {
         if(this.$store.getters['user/isGuest']) {
             this.$router.replace('/user/signin')
         }
         this.loadContributor()
     }
+
     @Watch('song')
     songChanged() {
         this.loadContributor()

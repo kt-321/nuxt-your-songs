@@ -17,7 +17,11 @@
                 @bookmark-handler="bookmarkButtonHandler"
                 @remove-bookmark-handler="removeBookmarkButtonHandler"
             />
-            <c-song-detail-contributor v-if="selectedTab === 1" :song="song" class="tab-content" />
+            <c-song-detail-contributor
+                v-if="selectedTab === 1"
+                :song="song"
+                class="tab-content"
+            />
         </div>
     </div>
 </template>

@@ -97,6 +97,7 @@ export default class PageSongIndex extends Vue {
             this.loadSongs()
         }
     }
+
     // 曲の編集完了後に曲一覧を再読み込み
     async songEditFinished() {
         this.loadSongs()
@@ -107,6 +108,7 @@ export default class PageSongIndex extends Vue {
         this.songs = await this.$store.getters['song/list']
         this.selectedSong = this.$store.getters['song/find'](this.selectedSong)
     }
+    
     mounted () {
         if(this.$store.getters['user/isGuest']) {
             this.$router.replace('/user/signin')
