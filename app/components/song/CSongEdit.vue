@@ -15,7 +15,7 @@
                 <c-text-input :model.sync="model.artist_name" />
             </c-labeled-item>
             <c-labeled-item label="曲の年代" required>
-                <c-dropdown :model.sync="model.music_age"  :items="musicAgeItems" data-value="value" />
+                <c-dropdown :model.sync="model.music_age" :items="musicAgeItems" data-value="value" />
             </c-labeled-item>
             <div class="button-area">
                 <c-button label="キャンセル" small @c-click="cancelHandler" />
@@ -42,7 +42,6 @@
 import { Component, Vue, PropSync, Watch } from 'vue-property-decorator'
 import { ISong } from '~/types/song'
 import { ApplicationError, BadRequest } from '~/types/error'
-// import { useTypeItems, structureTypeItems, zoningTypeItems } from '~/types/initializer'
 @Component
 export default class CSongEdit extends Vue {
     @PropSync('visible') modalVisible!: boolean
@@ -90,7 +89,6 @@ export default class CSongEdit extends Vue {
     // 完了ボタンが押された
     saveButtonDisabled: boolean = false
     async saveHandler() {
-        console.log(this.syncModel)
         this.saveButtonDisabled = true
         this.errors = []
         try {

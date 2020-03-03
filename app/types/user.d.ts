@@ -11,4 +11,5 @@ export interface ILoginUser {
     favorite_music_age: number | null
     favorite_artist: string | null
     comment: string | null
+    is_followed: boolean
 }

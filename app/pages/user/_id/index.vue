@@ -14,7 +14,19 @@
                 <c-user-detail-info :user="user" />
                 <!-- ボタンエリア -->
                 <m-panel class="button-area">
-                    ここにボタンを作成
+                    <c-button 
+                        v-if="user.id !== $store.getters['user/user'].id && !user.is_followed"
+                        block
+                        label="フォローする"
+                        @c-click="followButtonHandler"
+                    />
+                    <c-button
+                        v-if="user.id !== $store.getters['user/user'].id && user.is_followed"
+                        block
+                        warning
+                        label="フォロー中"
+                        @c-click="unfollowButtonHandler"
+                    />
                 </m-panel>
             </div>
             <!-- ユーザー詳細 -->
@@ -46,6 +58,17 @@ export default class PageUserDetail extends Vue {
     async loadUser() {
         const user = await this.$axios.$get(`/api/user/${this.$route.params.id}`)
         this.user = user
+    }
+
+    // ユーザーをフォローする
+    async followButtonHandler() {
+        await this.$axios.$post(`/api/user/${this.user.id}/follow`)
+        this.loadUser()
+    }
+    // ユーザーをフォローを外す
+    async unfollowButtonHandler() {
+        await this.$axios.$post(`/api/user/${this.user.id}/unfollow`)
+        this.loadUser()
     }
     mounted() {
         this.loadUser()
