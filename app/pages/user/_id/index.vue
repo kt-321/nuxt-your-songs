@@ -70,6 +70,7 @@ export default class PageUserDetail extends Vue {
         await this.$axios.$post(`/api/user/${this.user.id}/unfollow`)
         this.loadUser()
     }
+    
     mounted() {
         this.loadUser()
     } 
