@@ -1,3 +1,5 @@
+import { ILoginUser } from '~/types/user'
+
 export interface ISong {
     id: number | null
     user_id: number | null
@@ -11,4 +13,5 @@ export interface ISong {
     updated_at: string
     deleted_at: string | null
     is_bookmarked: boolean
+    bookmarking_users: Array<any>
 }
