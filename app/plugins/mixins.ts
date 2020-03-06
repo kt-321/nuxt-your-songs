@@ -15,6 +15,9 @@ import CLabeledItem from '~/components/ui/CLabeledItem.vue'
 import CDropdown from '~/components/ui/CDropdown.vue'
 import CMessage from '~/components/ui/CMessage.vue'
 import CError from '~/components/ui/CError.vue'
+import CSortButton from '~/components/ui/CSortButton.vue'
+import CCheckbox from '~/components/ui/CCheckbox.vue'
+import CSelectList from '~/components/ui/CSelectList.vue'
 
 Vue.mixin({
     components: {
@@ -32,7 +35,10 @@ Vue.mixin({
         CLabeledItem,
         CDropdown,
         CMessage,
-        CError
+        CError,
+        CSortButton,
+        CCheckbox,
+        CSelectList
     }
 })
 
