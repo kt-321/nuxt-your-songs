@@ -5,6 +5,7 @@
                 <img v-if="song.image_url" :src="song.image_url" />
                 <img v-else src="/img/song-icon.jpeg" />
             </div>
+            {{ song.bookmarking_users.length }}
             <table class="c-song-list-item-data table no-border">
                 <tbody>
                     <tr>

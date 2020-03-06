@@ -1,17 +1,20 @@
 <template>
     <m-page class="page-song-index">
         <c-song-search
+            :filter.sync="filter"
             @add-handler="addSongHandler"
+            @save-filter="saveFilter"
         />
         <m-column>
             <ul class="song-list">
                 <li v-if="songs.length > 0">
                     全曲数: {{ songs.length }}曲
+                    検索: {{ filteredModels().length }}曲
                 </li>
                 <li v-else>
                     <c-message warning>曲が見つかりませんでした</c-message>
                 </li>
-                <c-song-list-item v-for="song in songs" :key="song.id" :class="{ selected: selectedSong && song.id === selectedSong.id }"
+                <c-song-list-item v-for="song in filteredModels()" :key="song.id" :class="{ selected: selectedSong && song.id === selectedSong.id }"
                     :song="song" @c-select="selectSong(song)" />
             </ul>
             <!-- 曲詳細 -->
@@ -41,6 +44,7 @@ import CSongEdit from '~/components/song/CSongEdit.vue'
 import CSongSearch from '~/components/song/CSongSearch.vue'
 import { ISong } from '~/types/song'
 import { newSong } from '~/types/initializer'
+import { ISongFilter } from '~/types/filter'
 @Component({
     head: {
         titleTemplate: '曲一覧 | %s'
@@ -54,13 +58,37 @@ import { newSong } from '~/types/initializer'
 })
 export default class PageSongIndex extends Vue {
     songs: Array<ISong> = []
-    // 選択されている顧客
+    // 選択されている曲
     selectedSong: ISong | null = null
     selectSong(song: ISong | null) {
         this.selectedSong = song
     }
     songModalModel: ISong = newSong()
     songModalVisible: boolean = false
+
+    // 検索フィルタ
+    filter: ISongFilter = {
+        text: '',
+        status: {
+            hasVideo: false,
+            hasImage: false,
+            hasDescription: false,
+            is_bookmarked: false
+        },
+        music_age: 0,
+        sort: {
+            active: 'createdAtAsc',
+            createdAtAsc: false,
+            updatedAtAsc: false,
+            bookmarkingUsersAsc: false
+        },
+    }
+
+    // 検索反映後の表示一覧
+    filteredModels() {
+        return this.$store.getters['song/filterList'](this.filter)
+    }
+
     // 曲を追加
     addSongHandler() {
         this.songModalModel = newSong()
@@ -114,6 +142,12 @@ export default class PageSongIndex extends Vue {
             this.$router.replace('/user/signin')
         }
         this.loadSongs()
+        this.filter = this.$store.getters['song/filter']
+    }
+
+    async saveFilter() {
+        const filter = _.cloneDeep(this.filter)
+        await this.$store.dispatch('song/setFilter', filter)
     }
 }
 </script>
