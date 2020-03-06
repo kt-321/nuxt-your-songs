@@ -49,11 +49,11 @@ export default class CSongEdit extends Vue {
     errors: Array<ApplicationError> = []
     showModal: number = 1
     musicAgeItems = [
-        { label: '1970年代', value: '1970' },
-        { label: '1980年代', value: '1980' },
-        { label: '1990年代', value: '1990' },
-        { label: '2000年代', value: '2000' },
-        { label: '2010年代', value: '2010' }
+        { label: '1970年代', value: 1970 },
+        { label: '1980年代', value: 1980 },
+        { label: '1990年代', value: 1990 },
+        { label: '2000年代', value: 2000 },
+        { label: '2010年代', value: 2010 }
     ]
     // 次へボタンが押された
     async nextHandler() {

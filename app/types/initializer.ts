@@ -12,6 +12,7 @@ export function newSong(): ISong {
         created_at: '',
         updated_at: '',
         deleted_at: null,
-        is_bookmarked: false
+        is_bookmarked: false,
+        bookmarking_users: []
     }
 }

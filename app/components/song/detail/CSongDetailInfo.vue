@@ -24,6 +24,10 @@
                         <td>曲紹介</td>
                         <td>{{ song.description }}</td>
                     </tr>
+                    <tr v-if="song.bookmarking_users">
+                        <td>お気に入り登録者数</td>
+                        <td>{{ song.bookmarking_users.length }}人</td>
+                    </tr>
                     <tr>
                         <td>投稿日時</td>
                         <td>{{ song.created_at }}</td>
