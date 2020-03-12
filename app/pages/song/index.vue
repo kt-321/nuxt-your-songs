@@ -26,6 +26,8 @@
                 @c-song-detail-delete="deleteButtonHandler"
                 @c-song-detail-bookmark="bookmarkButtonHandler"
                 @c-song-detail-remove-bookmark="removeBookmarkButtonHandler"
+                @c-song-comment-edit-finished="songCommentEditFinished"
+                @c-song-comment-delete-finished="songCommentDeleteFinished"
             />
             <div v-else class="song-detail">
                 <c-message warning>曲リストから曲を選択してください</c-message>
@@ -128,6 +130,14 @@ export default class PageSongIndex extends Vue {
 
     // 曲の編集完了後に曲一覧を再読み込み
     async songEditFinished() {
+        this.loadSongs()
+    }
+    // 曲へのコメントの編集完了後に曲一覧を再読み込み
+    async songCommentEditFinished() {
+        this.loadSongs()
+    }
+    // 曲へのコメントの削除完了後に曲一覧を再読み込み
+    async songCommentDeleteFinished() {
         this.loadSongs()
     }
     // 曲一覧を読み込み

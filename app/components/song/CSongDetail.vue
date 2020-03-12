@@ -22,6 +22,13 @@
                 :song="song"
                 class="tab-content"
             />
+            <c-song-detail-comment
+                v-if="selectedTab === 2"
+                :song="song"
+                class="tab-content"
+                @song-comment-edit-finished-handler="songCommentEditFinishedHandler"
+                @song-comment-delete-finished-handler="songCommentDeleteFinishedHandler"
+            />
         </div>
     </div>
 </template>
@@ -32,11 +39,13 @@ import { newSong } from '~/types/initializer'
 import CSongDetailInfo from '~/components/song/detail/CSongDetailInfo.vue'
 import CSongDetailContributor from '~/components/song/detail/CSongDetailContributor.vue'
 import CSongEdit from '~/components/song/CSongEdit.vue'
+import CSongDetailComment from '~/components/song/detail/CSongDetailComment.vue'
 @Component({
     components: {
         CSongDetailInfo,
         CSongDetailContributor,
-        CSongEdit
+        CSongEdit,
+        CSongDetailComment
     }
 })
 export default class CSongDetail extends Vue {
@@ -45,7 +54,8 @@ export default class CSongDetail extends Vue {
     selectedTab: number = 0
     tabs: Array<any> = [
         { label: '曲情報', key: 0 },
-        { label: '投稿者', key: 1 }
+        { label: '投稿者', key: 1 },
+        { label: 'コメント', key: 2 }
     ]
     editModalModel: ISong = newSong()
     editModalVisible: boolean = false
@@ -61,6 +71,12 @@ export default class CSongDetail extends Vue {
 
     @Emit('c-song-detail-remove-bookmark')
     removeBookmarkButtonHandler() {}
+
+    @Emit('c-song-comment-edit-finished')
+    songCommentEditFinishedHandler() {}
+
+    @Emit('c-song-comment-delete-finished')
+    songCommentDeleteFinishedHandler() {}
 }
 </script>
 <style lang="stylus">
