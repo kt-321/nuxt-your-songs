@@ -35,10 +35,10 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 import { ILoginUser } from '~/types/user'
 @Component({
     filters: {
-        genderFormat: (gender) => {
-            if (gender === 1) {
+        genderFormat: (gender: string) => {
+            if (gender === '1') {
                 return '男性'
-            } else if (gender === 2) {
+            } else if (gender === '2') {
                 return '女性'
             } else {
                 return '-'

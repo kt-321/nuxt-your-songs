@@ -120,7 +120,9 @@ export const getters: GetterTree<State, RootState> = {
             })
         models.sort((a: ISong, b: ISong) => {
             // 対象のフィルタ 昇順/降順 を取得
-            const asc = filter.sort[filter.sort.active]
+            const filterSort: any = filter.sort
+            const asc = filterSort[filterSort.active]
+            
             // 追加日
             if (filter.sort.active === 'createdAtAsc' && a.created_at && b.created_at) {
                 return (moment(a.created_at) < moment(b.created_at) ? 1 : -1) * (asc ? -1 : 1)

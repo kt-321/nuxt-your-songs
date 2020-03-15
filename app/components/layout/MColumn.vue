@@ -18,7 +18,7 @@ export default class MColumn extends Vue {
     @Prop(Boolean) center!: boolean
     @Prop(Boolean) baseline!: boolean
     get getClass() {
-        const c = {
+        const c: any = {
             left: this.left,
             right: this.right,
             center: this.center,

@@ -53,7 +53,21 @@ import CUserDetailInfo from '~/components/user/detail/CUserDetailInfo.vue'
 })
 export default class PageUserDetail extends Vue {
     // ユーザー情報
-    user: ILoginUser = ""
+    user: ILoginUser = {
+        id: null,
+        name: '',
+        email: '',
+        role: 10,
+        created_at: '',
+        updated_at: '',
+        age: null,
+        gender: null,
+        image_url: null,
+        favorite_music_age: null,
+        favorite_artist: null,
+        comment: null,
+        is_followed: false
+    }
     // 再読み込み
     async loadUser() {
         const user = await this.$axios.$get(`/api/user/${this.$route.params.id}`)

@@ -27,7 +27,8 @@ export default class CSelectList extends Vue {
     @Prop({ type: String, default: 'label' }) dataLabel!: string
     // 値キー
     @Prop({ type: String, default: null }) dataValue!: string
-    private serialize(data) {
+
+    private serialize(data: any) {
         return JSON.stringify(data)
     }
     // スタイル
@@ -49,7 +50,7 @@ export default class CSelectList extends Vue {
             return
         }
         if (!this.multiple) {
-            const index = this.syncModel.findIndex((it) => this.serialize(it) === this.serialize(data))
+            const index = this.syncModel.findIndex((it: any) => this.serialize(it) === this.serialize(data))
             if (index >= 0) {
                 this.syncModel.splice(index, 1)
             } else {
