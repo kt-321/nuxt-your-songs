@@ -5,7 +5,7 @@ import VueRouter, { Route } from 'vue-router'
 import { NuxtCookies } from 'cookie-universal-nuxt'
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { Context } from '@nuxt/vue-app'
-import { RootState } from '~/store'
+import { RootState } from '~/store/index.ts'
 type Dictionary<T> = { [key: string]: T }
 export interface ApplicationContext {
     app: Vue

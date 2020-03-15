@@ -29,7 +29,7 @@
                         <td>{{ contributor.favorite_artist }}</td>
                     </tr>
                     <tr v-if="contributor.comment">
-                        <td>曲紹介</td>
+                        <td>自己紹介</td>
                         <td>{{ contributor.comment }}</td>
                     </tr>
                 </tbody>
@@ -62,10 +62,10 @@ import { ISong } from '~/types/song'
 import { ILoginUser } from '~/types/user'
 @Component({
     filters: {
-        genderFormat: (gender) => {
-            if (gender === 1) {
+        genderFormat: (gender: string) => {
+            if (gender === '1') {
                 return '男性'
-            } else if (gender === 2) {
+            } else if (gender === '2') {
                 return '女性'
             } else {
                 return '-'
@@ -75,7 +75,21 @@ import { ILoginUser } from '~/types/user'
 })
 export default class CsongDetailContributor extends Vue {
     @Prop(Object) song!: ISong | null
-    contributor: ILoginUser = ""
+    contributor: ILoginUser = {
+        id: null,
+        name: '',
+        email: '',
+        role: 10,
+        created_at: '',
+        updated_at: '',
+        age: null,
+        gender: null,
+        image_url: null,
+        favorite_music_age: null,
+        favorite_artist: null,
+        comment: null,
+        is_followed: false
+    }
 
     // 投稿者一覧を読み込み
     async loadContributor() {
