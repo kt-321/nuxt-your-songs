@@ -1,5 +1,5 @@
 export interface ILoginUser {
-    id: number
+    id: number | null
     name: string
     email: string
     role: number
