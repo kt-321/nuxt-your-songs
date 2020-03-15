@@ -28,6 +28,8 @@
                 @c-song-detail-remove-bookmark="removeBookmarkButtonHandler"
                 @c-song-comment-edit-finished="songCommentEditFinished"
                 @c-song-comment-delete-finished="songCommentDeleteFinished"
+                @position-fixed="positionFixed"
+                :class="{ '--fixed': fixed }"
             />
             <div v-else class="song-detail">
                 <c-message warning>曲リストから曲を選択してください</c-message>
@@ -159,6 +161,16 @@ export default class PageSongIndex extends Vue {
         const filter = _.cloneDeep(this.filter)
         await this.$store.dispatch('song/setFilter', filter)
     }
+
+    fixed = true
+    
+    positionFixed(detailFixed) {
+        if (detailFixed === true) {
+            this.fixed = true
+        } else {
+            this.fixed = false
+        }
+    }   
 }
 </script>
 
@@ -167,7 +179,8 @@ export default class PageSongIndex extends Vue {
     .song-list
         flex: 0 0 480px !important
     .song-detail
-        flex: 1 1 auto
-        position: fixed
-        right: 30px
+        &.--fixed
+            flex: 1 1 auto
+            position: fixed
+            right: 30px
 </style>

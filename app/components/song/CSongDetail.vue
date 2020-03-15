@@ -33,7 +33,7 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
+import { Component, Vue, Prop, Emit, Watch } from 'vue-property-decorator'
 import { ISong } from '~/types/song'
 import { newSong } from '~/types/initializer'
 import CSongDetailInfo from '~/components/song/detail/CSongDetailInfo.vue'
@@ -77,6 +77,21 @@ export default class CSongDetail extends Vue {
 
     @Emit('c-song-comment-delete-finished')
     songCommentDeleteFinishedHandler() {}
+
+    @Watch('song')
+    songChanged() {
+        this.selectedTab = 0
+    }
+
+    @Watch('selectedTab')
+    fixed() {
+        console.log(this.selectedTab)
+        if (this.selectedTab === 2 && this.song.comments.length >3) {
+            this.$emit('position-fixed', false)
+        } else {
+            this.$emit('position-fixed', true)
+        }
+    }
 }
 </script>
 <style lang="stylus">

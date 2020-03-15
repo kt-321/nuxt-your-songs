@@ -5,12 +5,12 @@
                 <li v-for="(comment, index) in song.comments" :key="index" class="comment">
                     <ul>
                         <li v-if="comment.created_at === comment.updated_at">
-                            {{ $store.getters['user/findById'](comment.user_id).name }}
+                            <a :href="commentUserLink(comment)">{{ commentUser(comment).name }}</a>
                             {{ comment.body }}
                             <p v-if="model.id && model.id === comment.id">編集中</p>
                         </li>
                         <li v-if="comment.created_at !== comment.updated_at">
-                            {{ $store.getters['user/findById'](comment.user_id).name }}
+                            <a :href="commentUserLink(comment)">{{ commentUser(comment).name }}</a>
                             {{ comment.body }}
                             <p v-if="model.id && model.id === comment.id">編集中</p>
                         </li>
@@ -51,7 +51,14 @@ export default class CSongDetailComment extends Vue {
         body: ''
     }
 
-    test = this.$store.getters['user/findById'](8)
+    commentUser(comment) {
+        return this.$store.getters['user/findById'](comment.user_id)
+    }
+
+    commentUserLink(comment) {
+        const userId = this.commentUser(comment).id
+        return `user/${userId}`
+    }
 
     // 完了ボタンが押された
     saveButtonDisabled: boolean = false
@@ -72,7 +79,6 @@ export default class CSongDetailComment extends Vue {
     }
 
     async deleteCommentButtonHandler(comment) {
-        // console.log(comment)
         if (confirm(`コメントを削除します。よろしいですか？`)) {
             await this.$axios.$delete(`/api/comment/${comment.id}`).catch((e) => {
                 const { message, code } = e.response.data
@@ -95,6 +101,7 @@ export default class CSongDetailComment extends Vue {
             }
             const sendData = _.cloneDeep(this.model)
             await this.$axios.$put(`/api/song/${this.song.id}/comment/${model.id}`, sendData)
+            this.$emit('song-comment-edit-finished-handler')
         } catch (e) {
             this.errors.push(e)
         }

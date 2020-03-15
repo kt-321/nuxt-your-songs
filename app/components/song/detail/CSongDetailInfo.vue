@@ -75,14 +75,6 @@
                 label="お気に入りから外す"
                 @c-click="removeBookmarkButtonHandler"
             />
-            <c-button
-                v-if="song.user_id !== $store.getters['user/user'].id"
-                warning
-                small
-                block
-                label="コメントする"
-                @c-click="commentButtonHandler"
-            />
         </m-card>
     </div>
 </template>
