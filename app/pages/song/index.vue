@@ -8,8 +8,7 @@
         <m-column>
             <ul class="song-list">
                 <li v-if="songs.length > 0">
-                    全曲数: {{ songs.length }}曲
-                    検索: {{ filteredModels().length }}曲
+                    検索結果: {{ filteredModels().length }}曲
                 </li>
                 <li v-else>
                     <c-message warning>曲が見つかりませんでした</c-message>

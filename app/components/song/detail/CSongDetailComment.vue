@@ -7,18 +7,18 @@
                         <li v-if="comment.created_at === comment.updated_at">
                             <a :href="commentUserLink(comment)">{{ commentUser(comment).name }}</a>
                             {{ comment.body }}
-                            <p v-if="model.id && model.id === comment.id">編集中</p>
+                            <p v-if="model.id && model.id === comment.id" style="color: red">(編集中)</p>
                         </li>
                         <li v-if="comment.created_at !== comment.updated_at">
                             <a :href="commentUserLink(comment)">{{ commentUser(comment).name }}</a>
                             {{ comment.body }}
-                            <p v-if="model.id && model.id === comment.id">編集中</p>
+                            <p v-if="model.id && model.id === comment.id" style="color: red">(編集中)</p>
                         </li>
                         <li v-if="comment.created_at === comment.updated_at">
-                            {{ comment.updated_at }}投稿日時
+                            投稿日時{{ comment.updated_at }}
                         </li>
                         <li v-if="comment.created_at !== comment.updated_at">
-                            {{ comment.updated_at }}投稿日時（更新日時）
+                            投稿日時（更新日時）{{ comment.updated_at }}
                         </li>
                     </ul>
                     <c-button v-if="comment.user_id === $store.getters['user/user'].id" class="button-delete" label="削除" danger small @c-click="deleteCommentButtonHandler(comment)" />
@@ -43,7 +43,6 @@ import { ISong } from '~/types/song'
 import { ApplicationError, BadRequest } from '~/types/error'
 @Component
 export default class CSongDetailComment extends Vue {
-    // @Prop(Object) song!: ISong | null
     @Prop(Object) song!: ISong
     errors: Array<ApplicationError> = []
     model = {
