@@ -135,6 +135,10 @@ export const getters: GetterTree<State, RootState> = {
             if (filter.sort.active === 'bookmarkingUsersAsc') {
                 return (a.bookmarking_users.length! < b.bookmarking_users.length! ? 1 : -1) * (asc ? -1 : 1)
             }
+            // コメント数順
+            if (filter.sort.active === 'commentedUsersAsc') {
+                return (a.comments.length! < b.comments.length! ? 1 : -1) * (asc ? -1 : 1)
+            }
             return 0
         })
         return models

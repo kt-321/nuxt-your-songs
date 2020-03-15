@@ -28,6 +28,14 @@
                         <th>曲の年代</th>
                         <td>{{ song.music_age }}年代</td>
                     </tr>
+                    <tr>
+                        <th>お気に入り数</th>
+                        <td>{{ song.bookmarking_users.length }}</td>
+                    </tr>
+                    <tr>
+                        <th>コメント数</th>
+                        <td>{{ song.comments.length }}</td>
+                    </tr>
                 </tbody>
             </table>
         </m-column>

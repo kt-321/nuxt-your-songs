@@ -13,6 +13,7 @@ export function newSong(): ISong {
         updated_at: '',
         deleted_at: null,
         is_bookmarked: false,
-        bookmarking_users: []
+        bookmarking_users: [],
+        comments: []
     }
 }

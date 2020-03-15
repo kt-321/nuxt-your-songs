@@ -91,4 +91,9 @@ export const getters: GetterTree<State, RootState> = {
     list(state): Array<ILoginUser> {
         return state.list
     },
+    findById: (state) => (id) => {
+        return state.list.find((it) => {
+            return it.id === id
+        })
+    },
 }
