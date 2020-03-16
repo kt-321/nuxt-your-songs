@@ -2,6 +2,7 @@ import { Configuration } from '@nuxt/types'
 const config: Configuration = {
     mode: 'spa',
     srcDir: 'app/',
+    buildDir: 'nuxt-dist',
     /*
      **  Headers of the page
      */
