@@ -1,17 +1,15 @@
 <template>
     <m-page class="page-signin" title="ログイン">
-        <div>
+        <m-form class="c-signin-form">
             <c-error :errors.sync="errors" />
-            <div>
-                <label>Email</label>
+            <c-labeled-item label="メールアドレス" required>
                 <input v-model="username" type="text" />
-            </div>
-            <div>
-                <label>パスワード</label>
+            </c-labeled-item>
+            <c-labeled-item label="パスワード" required>
                 <input v-model="password" type="password" />
-            </div>
-            <button @click="login">ログイン</button>
-        </div>        
+            </c-labeled-item>
+            <c-button label="ログイン" tiny success @c-click="login" />
+        </m-form>
     </m-page>
 </template>
 
@@ -70,4 +68,8 @@ export default class PageSignin extends Vue {
 }
 </script>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+.page-signin
+    .c-signin-form
+        text-align center
+</style>

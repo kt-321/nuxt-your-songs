@@ -1,25 +1,21 @@
 <template>
     <m-page class="page-signup" title="ユーザー登録">
-        <div>
+        <m-form class="c-signup-form">
             <c-error :errors.sync="errors" />
-            <div>
-                <label>お名前</label>
+            <c-labeled-item label="お名前" required>
                 <input v-model="form.name" type="text" />
-            </div>
-            <div>
-                <label>Email</label>
+            </c-labeled-item>
+            <c-labeled-item label="メールアドレス" required>
                 <input v-model="form.email" type="text" />
-            </div>
-            <div>
-                <label>パスワード</label>
+            </c-labeled-item>
+            <c-labeled-item label="パスワード" required>
                 <input v-model="form.password" type="password" />
-            </div>
-            <div>
-                <label>パスワード（確認用）</label>
+            </c-labeled-item>
+            <c-labeled-item label="パスワード（確認）" required>
                 <input v-model="form.password_confirmation" type="password" />
-            </div>
-            <button @click="signup">上記の内容で登録</button>
-        </div>        
+            </c-labeled-item>
+            <c-button label="上記の内容で登録" tiny warning @c-click="signup" />
+        </m-form>
     </m-page>
 </template>
 
@@ -80,4 +76,8 @@ export default class PageSignup extends Vue {
 }
 </script>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+.page-signup
+    .c-signup-form
+        text-align center
+</style>
