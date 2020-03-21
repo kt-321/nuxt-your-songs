@@ -42,10 +42,10 @@
         </m-column>
     </li>
 </template>
-
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { ISong } from '~/types/song'
+
 @Component({})
 export default class CSongListItem extends Vue {
     @Prop(Object) song!: ISong

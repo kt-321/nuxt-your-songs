@@ -85,8 +85,7 @@ export default class CSongDetail extends Vue {
 
     @Watch('selectedTab')
     fixed() {
-        console.log(this.selectedTab)
-        if (this.selectedTab === 2 && this.song.comments.length >3) {
+        if ((this.selectedTab === 2 && this.song.comments.length >2) || (this.selectedTab === 0 && this.song.video_url !== null)) {
             this.$emit('position-fixed', false)
         } else {
             this.$emit('position-fixed', true)

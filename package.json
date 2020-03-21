@@ -37,6 +37,7 @@
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5",
     "vue-property-decorator": "^8.3.0",
+    "vue-youtube": "^1.4.0",
     "vue2-editor": "^2.10.2",
     "vuex-class": "^0.3.2",
     "vuex-module-decorator": "^0.1.1"

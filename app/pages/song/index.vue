@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import _ from 'lodash'
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import CSongListItem from '~/components/song/CSongListItem.vue'
 import CSongDetail from '~/components/song/CSongDetail.vue'
 import CSongEdit from '~/components/song/CSongEdit.vue'
@@ -68,6 +68,8 @@ export default class PageSongIndex extends Vue {
     }
     songModalModel: ISong = newSong()
     songModalVisible: boolean = false
+
+    hasVideo: boolean = false
 
     // 検索フィルタ
     filter: ISongFilter = {
@@ -169,7 +171,15 @@ export default class PageSongIndex extends Vue {
         } else {
             this.fixed = false
         }
-    }   
+    }
+    @Watch('selectedSong') 
+    changeSelect() {
+        if (this.selectedSong && this.selectedSong.video_url !== null) {
+            this.fixed = false
+        } else {
+            this.fixed = true
+        }
+    }
 }
 </script>
 
