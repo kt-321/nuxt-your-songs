@@ -37,7 +37,6 @@ export default class PageSignin extends Vue {
         const response = await this.$axios.$post('/oauth/token', postData).catch((e) => {
                 console.log('アクセストークン取得失敗')
         })
-        console.log(response)
         this.$cookies.set('__cred__', response.access_token, {
             path: '/',
         })
