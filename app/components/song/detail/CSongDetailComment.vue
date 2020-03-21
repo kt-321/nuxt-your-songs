@@ -50,11 +50,11 @@ export default class CSongDetailComment extends Vue {
         body: ''
     }
 
-    commentUser(comment) {
+    commentUser(comment: any) {
         return this.$store.getters['user/findById'](comment.user_id)
     }
 
-    commentUserLink(comment) {
+    commentUserLink(comment: any) {
         const userId = this.commentUser(comment).id
         return `user/${userId}`
     }
@@ -77,7 +77,7 @@ export default class CSongDetailComment extends Vue {
         }
     }
 
-    async deleteCommentButtonHandler(comment) {
+    async deleteCommentButtonHandler(comment: any) {
         if (confirm(`コメントを削除します。よろしいですか？`)) {
             await this.$axios.$delete(`/api/comment/${comment.id}`).catch((e) => {
                 const { message, code } = e.response.data
@@ -87,11 +87,11 @@ export default class CSongDetailComment extends Vue {
         }
     }
 
-    async editCommentButtonHandler(comment) {
+    async editCommentButtonHandler(comment: any) {
         this.model = _.cloneDeep(comment)
     }
 
-    async editSaveButtonHandler(model) {
+    async editSaveButtonHandler(model :any) {
         try {
             this.errors = []
             // バリデーション
@@ -106,7 +106,7 @@ export default class CSongDetailComment extends Vue {
         }
     }
 
-    cancelEditButtonHandler(model) {
+    cancelEditButtonHandler(model: any) {
         this.model.id = null
         this.model.body = ''
         this.errors = []
