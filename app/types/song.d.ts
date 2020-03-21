@@ -14,4 +14,5 @@ export interface ISong {
     deleted_at: string | null
     is_bookmarked: boolean
     bookmarking_users: Array<any>
+    comments: Array<any>
 }

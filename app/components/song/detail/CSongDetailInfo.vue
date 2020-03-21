@@ -29,6 +29,10 @@
                         <td>{{ song.bookmarking_users.length }}人</td>
                     </tr>
                     <tr>
+                        <td>曲へのコメント数</td>
+                        <td>{{ song.comments.length }}</td>
+                    </tr>
+                    <tr>
                         <td>投稿日時</td>
                         <td>{{ song.created_at }}</td>
                     </tr>

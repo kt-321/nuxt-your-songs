@@ -20,6 +20,12 @@
                     :info="filter.sort.active === 'bookmarkingUsersAsc'"
                     @cs-click="filter.sort.active = 'bookmarkingUsersAsc'"
                 />
+                <c-sort-button
+                    label="コメント数順"
+                    :asc.sync="filter.sort.commentedUsersAsc"
+                    :info="filter.sort.active === 'commentedUsersAsc'"
+                    @cs-click="filter.sort.active = 'commentedUsersAsc'"
+                />
             </div>
             <div class="text-search">
                 <c-dropdown :items="musicAgeItems" :model.sync="filter.music_age" data-label="label" data-value="value" />
@@ -27,6 +33,7 @@
             </div>
         </m-column>
         <div class="song-type">
+            <span style="font-weight: bold">絞り込み</span>
             <c-checkbox text="映像あり" :checked.sync="filter.status.hasVideo" />
             <c-checkbox text="画像あり" :checked.sync="filter.status.hasImage" />
             <c-checkbox text="曲紹介あり" :checked.sync="filter.status.hasDescription" />

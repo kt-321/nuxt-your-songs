@@ -8,8 +8,7 @@
         <m-column>
             <ul class="song-list">
                 <li v-if="songs.length > 0">
-                    全曲数: {{ songs.length }}曲
-                    検索: {{ filteredModels().length }}曲
+                    検索結果: {{ filteredModels().length }}曲
                 </li>
                 <li v-else>
                     <c-message warning>曲が見つかりませんでした</c-message>
@@ -26,6 +25,10 @@
                 @c-song-detail-delete="deleteButtonHandler"
                 @c-song-detail-bookmark="bookmarkButtonHandler"
                 @c-song-detail-remove-bookmark="removeBookmarkButtonHandler"
+                @c-song-comment-edit-finished="songCommentEditFinished"
+                @c-song-comment-delete-finished="songCommentDeleteFinished"
+                @position-fixed="positionFixed"
+                :class="{ '--fixed': fixed }"
             />
             <div v-else class="song-detail">
                 <c-message warning>曲リストから曲を選択してください</c-message>
@@ -130,6 +133,14 @@ export default class PageSongIndex extends Vue {
     async songEditFinished() {
         this.loadSongs()
     }
+    // 曲へのコメントの編集完了後に曲一覧を再読み込み
+    async songCommentEditFinished() {
+        this.loadSongs()
+    }
+    // 曲へのコメントの削除完了後に曲一覧を再読み込み
+    async songCommentDeleteFinished() {
+        this.loadSongs()
+    }
     // 曲一覧を読み込み
     async loadSongs() {
         await this.$store.dispatch('song/sync')
@@ -149,6 +160,16 @@ export default class PageSongIndex extends Vue {
         const filter = _.cloneDeep(this.filter)
         await this.$store.dispatch('song/setFilter', filter)
     }
+
+    fixed = true
+    
+    positionFixed(detailFixed) {
+        if (detailFixed === true) {
+            this.fixed = true
+        } else {
+            this.fixed = false
+        }
+    }   
 }
 </script>
 
@@ -157,7 +178,8 @@ export default class PageSongIndex extends Vue {
     .song-list
         flex: 0 0 480px !important
     .song-detail
-        flex: 1 1 auto
-        position: fixed
-        right: 30px
+        &.--fixed
+            flex: 1 1 auto
+            position: fixed
+            right: 30px
 </style>
