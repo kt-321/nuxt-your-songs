@@ -28,8 +28,8 @@ export default class PageSignin extends Vue {
     async login() {
         const postData = {
             'grant_type': 'password',
-            'client_id': '6',
-            'client_secret': 'hqsU5vHqXaVVH85MdhZORkosxNCkeF3NURJkLwMp',
+            'client_id': '2',
+            'client_secret': '7sEUwTdsRURaotxx7snw7YWYw4IGJuQ5Ez7EinDa',
             'username': this.username,
             'password': this.password,
             'scope': '',
@@ -37,6 +37,7 @@ export default class PageSignin extends Vue {
         const response = await this.$axios.$post('/oauth/token', postData).catch((e) => {
                 console.log('アクセストークン取得失敗')
         })
+        console.log(response)
         this.$cookies.set('__cred__', response.access_token, {
             path: '/',
         })
