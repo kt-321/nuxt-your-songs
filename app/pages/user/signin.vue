@@ -36,13 +36,14 @@ export default class PageSignin extends Vue {
             }
             if (this.password.length === 0) {
                 this.errors.push(new BadRequest('パスワードが入力されていません'))
-        const postData = {
-            'grant_type': 'password',
-            'client_id': '2',
-            'client_secret': '7sEUwTdsRURaotxx7snw7YWYw4IGJuQ5Ez7EinDa',
-            'username': this.username,
-            'password': this.password,
-            'scope': ''
+            }
+            const postData = {
+                'grant_type': 'password',
+                'client_id': '2',
+                'client_secret': '7sEUwTdsRURaotxx7snw7YWYw4IGJuQ5Ez7EinDa',
+                'username': this.username,
+                'password': this.password,
+                'scope': ''
             }
             if (this.errors.length === 0) {
                 const postData = {
