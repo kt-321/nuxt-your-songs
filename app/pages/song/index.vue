@@ -163,7 +163,7 @@ export default class PageSongIndex extends Vue {
 
     fixed = true
     
-    positionFixed(detailFixed) {
+    positionFixed(detailFixed: any) {
         if (detailFixed === true) {
             this.fixed = true
         } else {
