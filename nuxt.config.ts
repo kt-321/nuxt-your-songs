@@ -36,7 +36,8 @@ const config: Configuration = {
      */
     plugins: [
         '~/plugins/mixins',
-        '~/plugins/axios'
+        '~/plugins/axios',
+        '~/plugins/vue-youtube'
     ],
     router: {
         middleware: ['auth']

@@ -43,7 +43,7 @@
                 </tbody>
             </table>
             <div v-if="song.video_url">
-                動画をここに表示TODO
+                <youtube :video-id="song.video_url" width="100%"></youtube>
             </div>
             <c-button
                 v-if="song.user_id === $store.getters['user/user'].id"
