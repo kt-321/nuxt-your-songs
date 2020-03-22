@@ -4,7 +4,6 @@
             <div class="c-song-list-item-photo">
                 <img v-if="song.image_url" :src="song.image_url" />
                 <img v-else src="/img/song-icon.jpeg" />
-                <c-button v-if="song.user_id === $store.getters['user/user'].id" tiny @c-click="selectFile">ファイル選択</c-button>
             </div>
             <table class="c-song-list-item-data table no-border">
                 <tbody>
@@ -52,14 +51,6 @@ export default class CSongListItem extends Vue {
 
     @Emit('c-select')
     selectSong() {}
-
-    selectFile() {
-        const input: HTMLInputElement | null = document.querySelector(`#${this.song.id}-input`)
-        if (input) {
-            input.click()
-        }
-    }
-
 }
 </script>
 
