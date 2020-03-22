@@ -1,8 +1,25 @@
 <template>
     <m-page class="page-mypage">
+        <c-message v-if="avatorUpdated" success>アイコンを変更しました</c-message>
+        <c-message v-if="profileUpdated" success>プロフィールを変更しました</c-message>
         <m-column>
+            <div class="avator" style="text-align: center">
+                <c-error :errors.sync="iconErrors" />
+                <img v-if="profileModel && profileModel.image_url" class="avator__icon" :src="$store.getters['user/user'].image_url" />
+                <img v-else class="avator__icon" src="/img/user-icon.png">
+                <div>
+                    <input
+                        class="avator__input"
+                        type="file"
+                        id="avator-input"
+                        accept="image/png,image/jpeg,image/gif"
+                        v-on:change="uploadAvator"
+                        style="display: none"
+                    />
+                    <c-button class="avator__button" label="アイコン変更" small success @c-click="selectAvator" />
+                </div>
+            </div>
             <m-form v-if="profileModel" title="プロフィール設定" bordered>
-                <c-message v-if="profileUpdated" success>プロフィールを変更しました</c-message>
                 <c-error :errors.sync="profileErrors" />
                 <c-labeled-item label="名前">
                     <c-text-input :model.sync="profileModel.name" />
@@ -29,7 +46,6 @@
                     <c-button small primary label="保存" @c-click="saveProfileHandler()" />
                 </c-labeled-item>
             </m-form>
-            <div>投稿してる曲などをここに表示</div>
         </m-column>
     </m-page>
 </template>
@@ -46,7 +62,10 @@ import { ILoginUser } from '~/types/user'
 export default class PageMypage extends Vue {
     profileModel: ILoginUser | null = null
     profileErrors: Array<ApplicationError> = []
+    iconErrors: Array<ApplicationError> = []
     profileUpdated: boolean = false
+    avatorUpdated: boolean = false
+    avatorUrl: string = ''
     genderItems = [
         { label: '男性', value: '1' },
         { label: '女性', value: '2' }
@@ -68,6 +87,7 @@ export default class PageMypage extends Vue {
         { label: '2010年代', value: '2010' }
     ]
     async saveProfileHandler() {
+        this.profileErrors = []
         try {
             this.profileUpdated = false
             if (!this.profileModel) {
@@ -79,13 +99,51 @@ export default class PageMypage extends Vue {
             if (this.profileModel.email.trim().length === 0) {
                 throw new BadRequest('メールアドレスが入力されていません')
             }
-            const user = await this.$axios.$put(`api/user/update/${this.profileModel.id}`, this.profileModel)
+            await this.$axios.$put(`api/user/update/${this.profileModel.id}`, this.profileModel)
+            const user = await this.$axios.$get('/api/user')
             this.$store.dispatch('user/setUser', user)
             this.profileUpdated = true
+            if (this.avatorUpdated) {
+                this.avatorUpdated = false
+            }
         } catch (e) {
             this.profileErrors.push(e)
         }
     }
+
+    selectAvator() {
+      const input: HTMLInputElement | null = document.querySelector('#avator-input');
+      if (input) {
+        input.click()
+      }
+    }
+    
+    async uploadAvator(e: any) {
+        this.avatorUpdated = false
+        this.iconErrors = []
+        e.preventDefault()
+        try {
+            const files = e.target.files ? e.target.files : e.dataTransfer.files
+            const file = files[0]
+            const params = new FormData()
+            params.append('file', file)
+            if (e.target.files.length === 0) {
+                return null;
+            }
+            const avatorfile = e.target.files[0];
+            let response: any = null
+            response = await this.$axios.$post(`/api/user/${this.profileModel!.id}/image`, params)
+            const user = await this.$axios.$get('/api/user')
+            this.$store.dispatch('user/setUser', user)
+            this.avatorUpdated = true
+            if (this.profileUpdated) {
+                this.profileUpdated = false
+            }
+        } catch (e) {
+            this.iconErrors.push(e)
+        }
+    }
+
     mounted() {
         this.profileModel = _.cloneDeep(this.$store.getters['user/user'])
     }
@@ -96,4 +154,10 @@ export default class PageMypage extends Vue {
     .heading
         position: relative
         border-bottom: 1px solid $light-border-color
+    .avator
+        padding: 16px 32px
+        .avator__icon
+            height: 300px
+            width: 300px
+            margin-bottom 5px
 </style>

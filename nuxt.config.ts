@@ -53,7 +53,7 @@ const config: Configuration = {
         '@nuxtjs/axios',
         '@nuxtjs/proxy',
         '@nuxtjs/style-resources',
-        ['cookie-universal-nuxt', { alias: 'cookies' }],
+        ['cookie-universal-nuxt', { alias: 'cookies' }]
     ],
     axios: {
         prefix: '/api'
