@@ -132,7 +132,7 @@ export default class PageMypage extends Vue {
             }
             const avatorfile = e.target.files[0];
             let response: any = null
-            response = await this.$axios.$post(`/api/user/${this.profileModel!.id}/image`, params)
+            response = await this.$axios.$post(`/api/user/image`, params)
             const user = await this.$axios.$get('/api/user')
             this.$store.dispatch('user/setUser', user)
             this.avatorUpdated = true
