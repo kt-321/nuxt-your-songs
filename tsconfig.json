@@ -28,7 +28,8 @@
       "@nuxt/types",
       "@nuxtjs/axios",
       "cookie-universal-nuxt",
-      "./app/types/nuxt"
+      "./app/types/nuxt",
+      "vue-youtube"
     ]
   },
   "exclude": [
