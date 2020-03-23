@@ -61,7 +61,7 @@ export default class PageSignup extends Vue {
                     path: '/',
                 })
                 // ダッシュボードに遷移
-                this.$router.replace('/dashboard')
+                this.$router.replace('/song')
             }
         } catch (e) {
             this.errors.push(e)
