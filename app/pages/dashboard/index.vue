@@ -2,7 +2,7 @@
     <m-page class="page-dashboard">
         <div>
             <p>ダッシュボード</p>
-            <pre>{{ $store.getters['user/user'] }}</pre>
+            <pre>{{ $store.getters['user/user'].name }}</pre>
         </div>
     </m-page>
 </template>

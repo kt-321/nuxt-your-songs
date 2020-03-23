@@ -1,12 +1,15 @@
 <template>
-    <div class="page-index">
-        <div>
-            <h1 class="title">Your Songs</h1>
-            <h2 class="subtitle">Welcome</h2>
-            <nuxt-link to="/user/signin">ログインページへ</nuxt-link>
-            <nuxt-link to="/signup">ユーザー登録ページへ</nuxt-link>
-        </div>
-    </div>
+    <m-page class="page-index" title="YourSongs">
+        <h1 class="subtitle">Welcome</h1>
+        <ul>
+            <li>
+                <nuxt-link to="/user/signin">ログインページへ</nuxt-link>
+            </li>
+            <li>
+                <nuxt-link to="/signup">ユーザー登録ページへ</nuxt-link>
+            </li>
+            </ul>
+    </m-page>
 </template>
 
 <script lang="ts">
