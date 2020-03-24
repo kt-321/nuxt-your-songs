@@ -2,8 +2,8 @@
     <li v-if="song" class="c-song-list-item" @click="selectSong">
         <m-column center>
             <div class="c-song-list-item-photo">
-                <img v-if="song.image_url" :src="song.image_url" />
-                <img v-else src="/img/song-icon.jpeg" />
+                <img v-if="song.image_url" class="song__icon" :src="song.image_url" />
+                <img v-else class="song__icon" src="/img/song-icon.jpeg">
             </div>
             <table class="c-song-list-item-data table no-border">
                 <tbody>
@@ -43,6 +43,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
+import { ApplicationError, BadRequest } from '~/types/error'
 import { ISong } from '~/types/song'
 
 @Component({})
