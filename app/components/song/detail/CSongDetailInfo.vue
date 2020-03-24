@@ -48,6 +48,14 @@
             <c-button
                 v-if="song.user_id === $store.getters['user/user'].id"
                 small
+                success
+                block
+                label="画像を変更する"
+                @c-click="uploadButtonHandler"
+            />
+            <c-button
+                v-if="song.user_id === $store.getters['user/user'].id"
+                small
                 block
                 label="編集"
                 @c-click="editButtonHandler"
@@ -80,6 +88,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
+import { ApplicationError, BadRequest } from '~/types/error'
 import { ISong } from '~/types/song'
 import { newSong } from '~/types/initializer'
 import CSongEdit from '~/components/song/CSongEdit.vue'
@@ -104,6 +113,9 @@ export default class CSongDetailInfo extends Vue {
     
     @Emit('remove-bookmark-handler')
     removeBookmarkButtonHandler() {}
+
+    @Emit('upload-handler')
+    uploadButtonHandler() {}
 }
 </script>
 <style lang="stylus">

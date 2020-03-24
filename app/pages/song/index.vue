@@ -1,5 +1,6 @@
 <template>
     <m-page class="page-song-index">
+        <c-message class="iconChangedMessage" v-if="iconUploaded" success>曲の画像を変更しました</c-message>
         <c-song-search
             :filter.sync="filter"
             @add-handler="addSongHandler"
@@ -25,6 +26,7 @@
                 @c-song-detail-delete="deleteButtonHandler"
                 @c-song-detail-bookmark="bookmarkButtonHandler"
                 @c-song-detail-remove-bookmark="removeBookmarkButtonHandler"
+                @c-song-icon-upload="uploadButtonHandler"
                 @c-song-comment-edit-finished="songCommentEditFinished"
                 @c-song-comment-delete-finished="songCommentDeleteFinished"
                 @position-fixed="positionFixed"
@@ -35,6 +37,7 @@
             </div>
         </m-column>
         <c-song-edit :visible.sync="songModalVisible" :model.sync="songModalModel" @c-song-edit-finished="songEditFinished" />
+        <c-song-icon :visible.sync="iconModalVisible" :model.sync="iconModalModel" @c-song-icon-uploaded="songIconUploaded" />
     </m-page>
 </template>
 
@@ -45,6 +48,7 @@ import CSongListItem from '~/components/song/CSongListItem.vue'
 import CSongDetail from '~/components/song/CSongDetail.vue'
 import CSongEdit from '~/components/song/CSongEdit.vue'
 import CSongSearch from '~/components/song/CSongSearch.vue'
+import CSongIcon from '~/components/song/CSongIcon.vue'
 import { ISong } from '~/types/song'
 import { newSong } from '~/types/initializer'
 import { ISongFilter } from '~/types/filter'
@@ -56,7 +60,8 @@ import { ISongFilter } from '~/types/filter'
         CSongListItem,
         CSongDetail,
         CSongEdit,
-        CSongSearch
+        CSongSearch,
+        CSongIcon
     }
 })
 export default class PageSongIndex extends Vue {
@@ -68,6 +73,9 @@ export default class PageSongIndex extends Vue {
     }
     songModalModel: ISong = newSong()
     songModalVisible: boolean = false
+    iconModalModel: ISong = newSong()
+    iconModalVisible: boolean = false
+    iconUploaded: boolean = false
 
     hasVideo: boolean = false
 
@@ -149,8 +157,27 @@ export default class PageSongIndex extends Vue {
         this.songs = await this.$store.getters['song/list']
         this.selectedSong = this.$store.getters['song/find'](this.selectedSong)
     }
+
+    // 曲の画像を変更するモーダルを表示
+    async uploadButtonHandler() {
+        if (this.selectedSong) {
+            this.iconModalModel = _.cloneDeep(this.selectedSong)
+            this.iconModalVisible = true
+        }
+    }
+
+    // 曲の画像アップロード完了後
+    songIconUploaded() {
+        this.loadSongs()
+        this.iconUploaded = true
+        setTimeout(this.closeMessage, 3000);
+    }
     
-    mounted () {
+    closeMessage() {
+        this.iconUploaded = false
+    }
+
+    mounted() {
         if(this.$store.getters['user/isGuest']) {
             this.$router.replace('/user/signin')
         }
@@ -192,4 +219,9 @@ export default class PageSongIndex extends Vue {
             flex: 1 1 auto
             position: fixed
             right: 30px
+    .iconChangedMessage
+        position: fixed
+        width 92%
+        z-index 99
+        opacity 0.9
 </style>
