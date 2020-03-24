@@ -16,6 +16,7 @@
                 @delete-handler="deleteButtonHandler"
                 @bookmark-handler="bookmarkButtonHandler"
                 @remove-bookmark-handler="removeBookmarkButtonHandler"
+                @upload-handler="uploadButtonHandler"
             />
             <c-song-detail-contributor
                 v-if="selectedTab === 1"
@@ -77,6 +78,9 @@ export default class CSongDetail extends Vue {
 
     @Emit('c-song-comment-delete-finished')
     songCommentDeleteFinishedHandler() {}
+
+    @Emit('c-song-icon-upload')
+    uploadButtonHandler() {}
 
     @Watch('song')
     songChanged() {
