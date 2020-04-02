@@ -98,4 +98,8 @@ export default class CSongDetail extends Vue {
 }
 </script>
 <style lang="stylus">
+.c-song-detail
+    max-width: calc((100% / 2) - (16px))
+    min-width: calc((100% / 2) - (16px))
+    margin 0 auto
 </style>
