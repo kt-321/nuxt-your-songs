@@ -1,6 +1,6 @@
 # nuxt-your-songs
 
-> My sublime Nuxt.js project
+アプリケーション「YourSongs」がPHP/Laravel+Nuxt.jsの構成であったときのNuxt.jsソースコード。現在は使用していない。
 
 ## Build Setup
 
